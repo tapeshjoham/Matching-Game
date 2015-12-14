@@ -11,7 +11,7 @@ match the following , column element types:
 [3]audio
 [4]video
 
-database name: matcinggame //same as repository , not confusions , easy to remember , is it ok ??
+database name: matchinggame //same as repository , not confusions , easy to remember , is it ok ??
 
 database schema
 [1]adminaccount
