@@ -11,7 +11,7 @@ match the following , column element types:
 [3]audio
 [4]video
 
-database name: matchthefollowinggame
+database name: matchthefollowinggame (matchgame) //smaller the better
 
 database schema
 [1]adminaccount
@@ -20,7 +20,7 @@ database schema
 
 relation definition of pairs
 [1]c1name varchar(200) not null		<path of file>
-[2]c1type varchar(10) not null		<text/audio/video/image>
+[2]c1type varchar(10) not null		<text/audio/video/image>    
 [3]c2name varchar(200) not null		<path of file>
 [4]c2type varchar(10) not null		<text/audio/video/image>
 
@@ -29,6 +29,6 @@ a-audio
 v-video
 i-image
 
-relation definition of adminaccount and playeraccount
+relation definition of adminaccount and playeraccount   //don't understand this part
 [1]username varchar(20) not null
 [2]password varchar(20) not null
