@@ -11,7 +11,7 @@ match the following , column element types:
 [3]audio
 [4]video
 
-database name: matchthefollowinggame (matchgame) //smaller the better
+database name: matcinggame //same as repository , not confusions , easy to remember , is it ok ??
 
 database schema
 [1]adminaccount
@@ -29,6 +29,6 @@ a-audio
 v-video
 i-image
 
-relation definition of adminaccount and playeraccount   //don't understand this part
+relation definition of adminaccount,playeraccount   //there are two relations with names as given , both will contain account details
 [1]username varchar(20) not null
 [2]password varchar(20) not null
