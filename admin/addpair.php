@@ -63,8 +63,11 @@
 	    }
 	}
 
+	//including this file will create two variable $sqlun,$sqlp which contain sql username and password respectively , which are stored in sqlunp.txt
+	include '/var/www/html/Matching-Game/assets/getsqlunp.php';
+
 //updating database
-	$conn=mysqli_connect("localhost",root,7196,"matchthefollowinggame");//establishing sql connection
+	$conn=mysqli_connect("localhost",$sqlun,$sqlp,"matchthefollowinggame");//establishing sql connection
 	if($conn->connect_error)
     	die("Connection to database failed: ".$conn->connect_error);
 
