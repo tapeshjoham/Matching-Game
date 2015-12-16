@@ -11,7 +11,7 @@ match the following , column element types:
 [3]audio
 [4]video
 
-database name: matchinggame //same as repository , not confusions , easy to remember , is it ok ??
+database name: matchinggame //same as repository , not confusions , easy to remember , is it ok ?? Yaah it is (Tapesh)
 
 database schema
 [1]adminaccount
@@ -19,7 +19,7 @@ database schema
 [3]pairs
 
 relation definition of pairs
-[1]c1name varchar(200) not null		<path of file>
+[1]c1name varchar(200) PRIMARY KEY	<path of file>  (PRIMARY KEY)
 [2]c1type varchar(10) not null		<text/audio/video/image>    
 [3]c2name varchar(200) not null		<path of file>
 [4]c2type varchar(10) not null		<text/audio/video/image>

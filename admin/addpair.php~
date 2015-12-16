@@ -1,16 +1,14 @@
 <?php
-/*
-Note - Command for MySQL is different for mine ...check if its working 
-*/
+//lines 31 and 53
 //including this file will create two variable $sqlun,$sqlp which contain sql username and password respectively , which are stored in sqlunp.txt
-//include '/var/www/html/Matching-Game/assets/getsqlunp.php';
+	include '/var/www/html/Matching-Game/assets/getsqlunp.php';
+	$sqlun = "root";
+	$sqlp = "tapesh12345";
 
-									//Connecting  database 
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	$username="root";$password="tapesh12345";$database="matchinggame";
-	mysql_connect(localhost,$username,$password);//establishing sql connection
-	@mysql_select_db($database) or die( "Unable to connect database");
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
+//Connecting  database
+	$conn=mysqli_connect("localhost",$sqlun,$sqlp,"matchthefollowinggame");//establishing sql connection
+	if($conn->connect_error)
+    	die("Connection to database failed: ".$conn->connect_error);
 
 	$c1name;$c2name;
 
@@ -67,8 +65,7 @@ Note - Command for MySQL is different for mine ...check if its working
 		$out = mysql_fetch_array($result);
 		$count2 = $count2+$out['cnt'];	
 		$count2++;
-		if($c1filetype==$c2filetype)
-			$count2++;
+
 		$c2name=$c2filetype.$count2;//file name to be modified****
 		
 		$targetfilec2=$targetdirc2.$c2name.".".$exts;
@@ -84,7 +81,7 @@ Note - Command for MySQL is different for mine ...check if its working
 	    }
 	}
 	$query = "insert into pairs values('$c1name','$c1filetype','$c2name','$c2filetype')";
-	$result = mysql_query($query);//running sql query
+	$result = $conn->query($query);//running sql query
 	if($result){
 		echo "<br>database successfully updated<br>";
 	}else{
