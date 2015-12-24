@@ -45,8 +45,10 @@
 				//parsing and making the arrays of col1 and col2 data
 				while(index<(pieces1.length-1)){
 					var pieces2=pieces1[index].split("::");
-					c1.innerHTML+=pieces2[0]+"<br>";
 					col1.push(pieces2[0]);
+					var pieces3=col1[index].split(";;");
+					c1.innerHTML+=col1[index]+pieces3[0]+pieces3[1]+"<br>";
+					c1.innerHTML+="<"+pieces3[1]+" controls><source src=\"/Matching-Game/assets/"+pieces3[1]+"/"+pieces3[0]+"\" type=\""+pieces3[1]+"/mpeg\"></"+pieces3[1]+"><br>";					
 					col2.push(pieces2[1]);
 					index++;
 				}
@@ -57,7 +59,8 @@
 				while(printed.length!=5){
 					var index2=Math.floor((Math.random() * col2.length) + 1)-1;
 					if(!exists(index2,printed)){
-						c2.innerHTML+=col2[index2]+"<input type=\"text\" id=\""+(index2)+"\"/><br>";
+						var pieces3=col2[index2].split(";;");
+						c2.innerHTML+="<"+pieces3[1]+" width=\"320\" height=\"240\" controls><source src=\"/Matching-Game/assets/"+pieces3[1]+"/"+pieces3[0]+"\" type=\""+pieces3[1]+"/mp4\"></"+pieces3[1]+"><br>";
 						printed.push(index2);
 					}
 					index++;

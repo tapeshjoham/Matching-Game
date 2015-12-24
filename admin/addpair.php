@@ -28,11 +28,11 @@
 		
 		$exts=findexts(basename($_FILES["c1file"]["name"]));//finding the extension of file and storing it in $exts
 		
-		$c1name="c1";//file name to be modified****
+		$c1name="c111111";//file name to be modified****
 		
 		$targetfilec1=$targetdirc1.$c1name.".".$exts;//this is the whole path of the upload file , including the name
 		
-		$c1name=$targetfilec1;//storing whole path in the filename
+		$c1name="c111111.".$exts;//storing whole path in the filename
 		
 		if (move_uploaded_file($_FILES["c1file"]["tmp_name"],$targetfilec1)){
 			echo "<br>The file has been uploaded , its path is :<br>$targetdirc1$targetfilec1<br>";
@@ -50,11 +50,11 @@
 		
 		$exts=findexts(basename($_FILES["c2file"]["name"]));
 		
-		$c2name="c2";//file name to be modified****
+		$c2name="c222222";//file name to be modified****
 		
 		$targetfilec2=$targetdirc2.$c2name.".".$exts;
 		
-		$c2name=$targetfilec2;
+		$c2name="c222222.".$exts;
 		
 		if (move_uploaded_file($_FILES["c2file"]["tmp_name"],$targetfilec2)){
 			echo "<br>The file has been uploaded , its path is :<br>$targetdirc2$targetfilec2<br>";

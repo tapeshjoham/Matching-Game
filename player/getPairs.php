@@ -13,9 +13,9 @@
 			$result = $conn->query($query);
 		}
 		$print=mt_rand(0,1);
-		if($print==1&&$row['c1']!=""&&row['c2']!=""&&(!exists($row['c1'],$printed,$counter))){
-			echo $row['c1']."::".$row['c2'].";;;";
-			array_push($printed,$row['c1']);
+		if($print==1&&$row['c1name']!=""&&row['c2name']!=""&&(!exists($row['c1name'],$printed,$counter))){
+			echo $row['c1name'].";;".$row['c1type']."::".$row['c2name'].";;".$row['c2type'].";;;<br>";
+			array_push($printed,$row['c1name']);
 			$counter++;
 		}
 		if($counter==5){
