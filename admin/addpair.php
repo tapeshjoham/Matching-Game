@@ -1,18 +1,42 @@
 <?php
-//tapesh you have to modify file names , have a look at lines 31 and 53
+/*
+Note - Command for MySQL is different for mine ...check if its working 
+*/
+	function getfilename($type){
+		
+		include '/var/www/html/Matching-Game/assets/getsqlunp.php';
 
+		$conn = new mysqli("localhost",$sqlun,$sqlp,"matchthefollowinggame");
+		if($conn->connect_error){
+			die ("Connection Failed:".$conn->connect_error);
+		}
 
-//function for finding extension of file
-	function findexts($filename){
-		$filename=strtolower($filename);
-		$exts=split("[/\\.]",$filename);
-		$n=count($exts)-1;
-		$exts=$exts[$n];
-		return $exts;
+		$query1="select max(c1name) as name from pairs where c1type='".$type."'";
+		$result1=$conn->query($query1);
+
+		$query2="select max(c2name) as name from pairs where c2type='".$type."'";
+		$result2=$conn->query($query2);
+
+		if($result1&&$result2){
+			$data1=$result1->fetch_assoc();
+			$data2=$result2->fetch_assoc();
+			$data1=$data1['name'];
+			$data2=$data2['name'];
+			$data1=$data1[strlen($type)];
+			$data2=$data2[strlen($type)];
+			if($data1>$data2){
+				echo "<br>".$type."".($data1+1)."<br>";
+				return $type."".($data1+1);
+			}else{
+				echo "<br>".$type."".($data2+1)."<br>";
+				return $type."".($data2+1);
+			}
+		}
 	}
 
-	$c2name;
-	$c1name;
+	getfilename('audio');
+
+	$c1name;$c2name;
 
 	$c1filetype=$_POST['c1filetype'];//file types
 	$c2filetype=$_POST['c2filetype'];
@@ -26,13 +50,19 @@
 
 		$targetdirc1=$targetdir.$c1filetype."/";//finding target/where-to-upload directory wrt file type and storing it in $targetfiledirc1
 		
-		$exts=findexts(basename($_FILES["c1file"]["name"]));//finding the extension of file and storing it in $exts
-		
 		$c1name="c111111";//file name to be modified****
 		
 		$targetfilec1=$targetdirc1.$c1name.".".$exts;//this is the whole path of the upload file , including the name
 		
 		$c1name="c111111.".$exts;//storing whole path in the filename
+
+		$exts = pathinfo($_FILES['c1file']['name'],PATHINFO_EXTENSION); //finding the extension of file and storing it in $exts
+		
+		$c1name=getfilename($c1filetype);
+		$c1name=$c1name.".".$exts;
+		$targetfilec1=$targetdirc1.$c1name;//this is the whole path of the upload file , including the name
+
+		echo $targetfilec1;
 		
 		if (move_uploaded_file($_FILES["c1file"]["tmp_name"],$targetfilec1)){
 			echo "<br>The file has been uploaded , its path is :<br>$targetdirc1$targetfilec1<br>";
@@ -48,14 +78,19 @@
 		
 		$targetdirc2=$targetdir.$c2filetype."/";
 		
-		$exts=findexts(basename($_FILES["c2file"]["name"]));
+		//$exts=findexts(basename($_FILES["c2file"]["name"]));
 		
-		$c2name="c222222";//file name to be modified****
+		$exts=pathinfo($_FILES['c2file']['name'],PATHINFO_EXTENSION);
 		
-		$targetfilec2=$targetdirc2.$c2name.".".$exts;
-		
-		$c2name="c222222.".$exts;
-		
+		$c2name=getfilename($c2filetype);
+		if($c1filetype==$c2filetype){
+			$c2name=$c2filetype."".(((int)$c2name[strlen($c2filetype)])+1);	
+		}
+		$c2name=$c2name.".".$exts;
+		$targetfilec2=$targetdirc2.$c2name;
+
+		echo $targetfilec2;
+
 		if (move_uploaded_file($_FILES["c2file"]["tmp_name"],$targetfilec2)){
 			echo "<br>The file has been uploaded , its path is :<br>$targetdirc2$targetfilec2<br>";
 	    }else{
@@ -66,10 +101,10 @@
 	//including this file will create two variable $sqlun,$sqlp which contain sql username and password respectively , which are stored in sqlunp.txt
 	include '/var/www/html/Matching-Game/assets/getsqlunp.php';
 
-//updating database
-	$conn=mysqli_connect("localhost",$sqlun,$sqlp,"matchthefollowinggame");//establishing sql connection
-	if($conn->connect_error)
-    	die("Connection to database failed: ".$conn->connect_error);
+	$conn = new mysqli("localhost",$sqlun,$sqlp,"matchthefollowinggame");
+	if($conn->connect_error){
+		die ("Connection Failed:".$conn->connect_error);
+	}
 
 	$query = "insert into pairs values('$c1name','$c1filetype','$c2name','$c2filetype')";
 	$result = $conn->query($query);//running sql query

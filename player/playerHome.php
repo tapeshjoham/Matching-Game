@@ -38,6 +38,21 @@
         	xhttp.open("GET", "getPairs.php", true);
         	xhttp.send();
 			
+        	function printhtml(name,type,htmlelement){
+        		if(type=="audio"){
+        			htmlelement.innerHTML+="<"+type+" controls><source src=\"/Matching-Game/assets/"+type+"/"+name+"\" type=\""+type+"/ogg\"/></"+type+"><br>";
+        		}
+        		if(type=="video"){
+        			htmlelement.innerHTML+="<"+type+" width=\"320\" height=\"240\" controls><source src=\"/Matching-Game/assets/"+type+"/"+name+"\" type=\""+type+"/mp4\"/></"+type+"><br>";
+        		}
+        		if(type=="image"){
+        			htmlelement.innerHTML+="<img width=\"320\" height=\"240\" src=\"/Matching-Game/assets/"+type+"/"+name+"\"/><br>";
+        		}
+        		if(type=="text"){
+        			htmlelement.innerHTML+="<div width=\"320\" height=\"240\">"+name+"</div>";
+        		}
+        	}
+
 			function parseAndPrint(response){
 				var pieces1 = response.split(";;;");
 				var index=0;
@@ -47,8 +62,9 @@
 					var pieces2=pieces1[index].split("::");
 					col1.push(pieces2[0]);
 					var pieces3=col1[index].split(";;");
-					c1.innerHTML+=col1[index]+pieces3[0]+pieces3[1]+"<br>";
-					c1.innerHTML+="<"+pieces3[1]+" controls><source src=\"/Matching-Game/assets/"+pieces3[1]+"/"+pieces3[0]+"\" type=\""+pieces3[1]+"/mpeg\"></"+pieces3[1]+"><br>";					
+					//c1.innerHTML+=pieces3[0]+pieces3[1]+"<br>";
+					//c1.innerHTML+="<"+pieces3[1]+" controls><source src=\"/Matching-Game/assets/"+pieces3[1]+"/"+pieces3[0]+"\" type=\""+pieces3[1]+"/ogg\"/></"+pieces3[1]+"><br>";					
+					printhtml(pieces3[0],pieces3[1],c1);
 					col2.push(pieces2[1]);
 					index++;
 				}
@@ -60,7 +76,9 @@
 					var index2=Math.floor((Math.random() * col2.length) + 1)-1;
 					if(!exists(index2,printed)){
 						var pieces3=col2[index2].split(";;");
-						c2.innerHTML+="<"+pieces3[1]+" width=\"320\" height=\"240\" controls><source src=\"/Matching-Game/assets/"+pieces3[1]+"/"+pieces3[0]+"\" type=\""+pieces3[1]+"/mp4\"></"+pieces3[1]+"><br>";
+						//c2.innerHTML+=pieces3[0]+pieces3[1]+"<br>";
+						//c2.innerHTML+="<"+pieces3[1]+" width=\"320\" height=\"240\" controls><source src=\"/Matching-Game/assets/"+pieces3[1]+"/"+pieces3[0]+"\" type=\""+pieces3[1]+"/mp4\"/></"+pieces3[1]+"><br>";
+						printhtml(pieces3[0],pieces3[1],c2);
 						printed.push(index2);
 					}
 					index++;

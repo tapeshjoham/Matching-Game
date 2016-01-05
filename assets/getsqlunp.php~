@@ -8,7 +8,7 @@
 	// Output one line until end-of-file
 	$line = fgets($myfile);
 	$pieces = explode(",",$line);
-	echo "$sqlun $sqlp";
+	echo "$sqlUN $sqlP";
 	$sqlun = $pieces[0];
 	$sqlp = $pieces[1];
 	fclose($myfile);
