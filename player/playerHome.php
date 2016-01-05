@@ -6,6 +6,7 @@
 		</title>
 	</head>
 	<body style="text-align:center;">
+		<font> in column 2 , there is a text box given , every text box belongs to element above it , write the number of element 1-5 in column1 to match and press submit</font>
 		<div style="float:left;width:50%">
 			column1
 			<br>
@@ -26,6 +27,7 @@
 		<script>
 			var col1=[];
 			var col2=[];
+			var printed=[];
 			var c1=document.getElementById('c1e');
 			var c2=document.getElementById('c2e');
 			var xhttp = new XMLHttpRequest();
@@ -40,16 +42,16 @@
 			
         	function printhtml(name,type,htmlelement){
         		if(type=="audio"){
-        			htmlelement.innerHTML+="<"+type+" controls><source src=\"/Matching-Game/assets/"+type+"/"+name+"\" type=\""+type+"/ogg\"/></"+type+"><br>";
+        			htmlelement.innerHTML+="<"+type+" controls><source src=\"/Matching-Game/assets/"+type+"/"+name+"\" type=\""+type+"/ogg\"/></"+type+"><br><hr>";
         		}
         		if(type=="video"){
-        			htmlelement.innerHTML+="<"+type+" width=\"320\" height=\"240\" controls><source src=\"/Matching-Game/assets/"+type+"/"+name+"\" type=\""+type+"/mp4\"/></"+type+"><br>";
+        			htmlelement.innerHTML+="<"+type+" width=\"320\" height=\"240\" controls><source src=\"/Matching-Game/assets/"+type+"/"+name+"\" type=\""+type+"/mp4\"/></"+type+"><br><hr>";
         		}
         		if(type=="image"){
-        			htmlelement.innerHTML+="<img width=\"320\" height=\"240\" src=\"/Matching-Game/assets/"+type+"/"+name+"\"/><br>";
+        			htmlelement.innerHTML+="<img width=\"320\" height=\"240\" src=\"/Matching-Game/assets/"+type+"/"+name+"\"/><br><hr>";
         		}
         		if(type=="text"){
-        			htmlelement.innerHTML+="<div width=\"320\" height=\"240\">"+name+"</div>";
+        			htmlelement.innerHTML+="<div width=\"320\" height=\"240\">"+name+"</div><hr>";
         		}
         	}
 
@@ -69,9 +71,9 @@
 					index++;
 				}
 
-				var printed=[];
 				//printing
 				index=0;
+				var count=-1;
 				while(printed.length!=5){
 					var index2=Math.floor((Math.random() * col2.length) + 1)-1;
 					if(!exists(index2,printed)){
@@ -79,6 +81,8 @@
 						//c2.innerHTML+=pieces3[0]+pieces3[1]+"<br>";
 						//c2.innerHTML+="<"+pieces3[1]+" width=\"320\" height=\"240\" controls><source src=\"/Matching-Game/assets/"+pieces3[1]+"/"+pieces3[0]+"\" type=\""+pieces3[1]+"/mp4\"/></"+pieces3[1]+"><br>";
 						printhtml(pieces3[0],pieces3[1],c2);
+						count++;
+						c2.innerHTML+="<br>"+"<input type=\"text\" id=\""+count+"\"/>"+"<br>";
 						printed.push(index2);
 					}
 					index++;
@@ -106,10 +110,8 @@
 				var index=0;
 				while(index<5){
 					var value=document.getElementById(index).value;
-					document.getElementById('score').innerHTML+=col1[value-1]+":::"+col2[index];
-					var p1=col1[value-1].split("a");
-					var p2=col2[index].split("b");
-					if(p1[1].localeCompare(p2[1])==0)
+					var assigned=printed[index];
+					if(value==(assigned+1))
 						score++;
 					index++;
 				}

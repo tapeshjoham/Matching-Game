@@ -1,5 +1,6 @@
 <?php
-	$conn=mysqli_connect("localhost",root,7196,"matchthefollowinggame");
+	include "/var/www/html/Matching-Game/assets/getconfig.php";
+	$conn=mysqli_connect("localhost",$sqlun,$sqlp,"matchthefollowinggame");
 	if($conn->connect_error)
     	die("Connection to database failed: ".$conn->connect_error);
 
