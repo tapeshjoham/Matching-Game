@@ -12,8 +12,8 @@ Project Member -
 NOTE :
 [1] go to assets/config.txt
 [2] write your sqlun,sqlp, in the file instead of mine as i have written there
-[3] check if mysqli commands run in your system , if not please run them , as they are new and old ones will soon be depricated
-[4] dont change mysql commands to old one , its takes much work to change them back
+[3] check if mysqli commands run in your system, if not please run them, as they are new and old ones will soon be depricated
+[4] dont change mysql commands to old one, its takes much work to change them back
 
 player side :-
 (being done by ashish)
