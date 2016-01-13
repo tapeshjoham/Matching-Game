@@ -6,7 +6,7 @@ Note - Command for MySQL is different for mine ...check if its working
 	function getfilename($type){
 		
 		include '/var/www/html/Matching-Game/assets/getconfig.php';
-		$conn = new mysqli("localhost",$sqlun,$sqlp,"matchinggame");
+		$conn = new mysqli("localhost",$sqlun,$sqlp,"matchthefollowinggame");
 		if($conn->connect_error){
 			die ("Connection Failed:".$conn->connect_error);
 		}
@@ -85,7 +85,7 @@ Note - Command for MySQL is different for mine ...check if its working
 	}
 	//including this file will create two variable $sqlun,$sqlp which contain sql username and password respectively , which are stored in sqlunp.txt
 	include '/var/www/html/Matching-Game/assets/getconfig.php';
-	$conn = new mysqli("localhost",$sqlun,$sqlp,"matchinggame");
+	$conn = new mysqli("localhost",$sqlun,$sqlp,"matchthefollowinggame");
 	if($conn->connect_error){
 		die ("Connection Failed:".$conn->connect_error);
 	}
