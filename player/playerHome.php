@@ -5,8 +5,8 @@
 			player | home
 		</title>
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
- 	 	<script src="/Matching-Game/assets/jquery.min.js"></script>
-  		<script src="/Matching-Game/assets/jquery-ui.min.js"></script>
+ 	 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   		<style>
   			ul { list-style-type:none;margin:0;padding: 0;}
   			li { margin:4px;padding:0;height:300px;background-color:#eee; }
