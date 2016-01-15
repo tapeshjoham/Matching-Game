@@ -1,3 +1,10 @@
+<?php
+	include '/var/www/html/Matching-Game/assets/checkcredentials.php';
+	if($output==104)
+		die("invalid credentials");
+	if($output==103)
+		die("permission denied");
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -6,11 +13,12 @@
 		</title>
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
  	 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   		<style>
   			ul { list-style-type:none;margin:0;padding: 0;}
-  			li { margin:4px;padding:0;height:300px;background-color:#eee; }
-  			#c2list li { margin:4px;padding:0;height:300px;background-color:#999;}
+  			li { margin:0px;padding:0;height:300px;background-color:#eee; }
+  			#c2list li { margin:0px;padding:0;height:300px;background-color:#999;}
+  			li:active { box-shadow: 0px 2px 20px; }
   		</style>
 	</head>
 	<body style="text-align:center;">
@@ -140,7 +148,7 @@
 		</script>
 		<script>
 			$("document").ready(function(){
-				$("#c2list").sortable();
+				$("#c2list").sortable({axis:"y"});
     			$("#c2list").disableSelection();
 			});
 		</script>

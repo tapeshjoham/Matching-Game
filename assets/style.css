@@ -1,0 +1,25 @@
+input[type=text],input[type=password]{
+	text-decoration:none;
+	outline:none;
+	border:none;
+	font-size:160%;
+    display:inline-block;
+    border-bottom:2px solid #aaa;
+    transition:border 0.3s ease;    
+}
+
+input[type=text]:focus,input[type=password]:focus{
+	border-bottom:2px solid blue;
+}
+
+.inputerror{
+	color:red;
+}
+
+.inputdiv{
+	text-align:left;
+	padding:0px;
+	margin:0px;
+	margin-left:auto;
+	margin-right:auto;
+}

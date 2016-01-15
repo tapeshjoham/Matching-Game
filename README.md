@@ -60,3 +60,10 @@ gamesplayed int
 date varchar(10)
 playerusername varchar(20)
 score int
+
+OUTPUTS :-
+101 - username already taken , cant create account
+102 - everything alright , move forward
+103 - query is not running , returning 0 on running query
+104 - invalid credentials while login
+105 - error in table transactions , contact admin , invalid sql pass or un or dbname

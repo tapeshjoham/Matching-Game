@@ -1,4 +1,4 @@
 sql_username:root:
-sql_password:tapesh12345:
+sql_password:719:
 sql_database:matchinggame:
 localhost_directory:/var/www/html/:

@@ -1,3 +1,10 @@
+<?php
+	include '/var/www/html/Matching-Game/assets/checkcredentials.php';
+	if($output==104)
+		die("invalid credentials");
+	if($output==103)
+		die("permission denied");
+?>
 <!DOCTYPE html>
 <html>
 	<head>
