@@ -27,7 +27,7 @@
 				$cnt = substr($value,5);
 				$value = $value.extension($type);
 				include '/var/www/html/Matching-Game/assets/getconfig.php';
-				$conn = new mysqli("localhost",$sqlun,$sqlp,"matchthefollowinggame");
+				$conn = new mysqli("localhost",$sqlun,$sqlp,"matchinggame");
 				if($conn->connect_error){
 					die ("Connection Failed:".$conn->connect_error);
 				}
@@ -53,7 +53,7 @@
 
 			include '/var/www/html/Matching-Game/assets/getconfig.php';
 
-			$conn = new mysqli("localhost",$sqlun,$sqlp,"matchthefollowinggame");
+			$conn = new mysqli("localhost",$sqlun,$sqlp,"matchinggame");
 			if($conn->connect_error){
 				die ("Connection Failed:".$conn->connect_error);
 			}
