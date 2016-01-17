@@ -1,9 +1,9 @@
 
 <?php
 
-	$username = htmlspecialchars($_POST['username']);
-	$password = htmlspecialchars($_POST['password']);
-    $usertype = htmlspecialchars($_POST['usertype']);
+	$username = $_SESSION['username'];
+	$password = $_SESSION['password'];
+    $usertype = $_SESSION['usertype'];
 
     $output=0;
 	//creating sql un and pass

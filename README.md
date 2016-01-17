@@ -56,8 +56,8 @@ username varchar(20)
 highscore int
 gamesplayed int
 
-[5]gameplayed
-date varchar(10)
+[5]gamesplayed
+date date
 playerusername varchar(20)
 score int
 
@@ -67,3 +67,5 @@ OUTPUTS :-
 103 - query is not running , returning 0 on running query
 104 - invalid credentials while login
 105 - error in table transactions , contact admin , invalid sql pass or un or dbname
+106 - player current score is not greater than highscore
+107 - player made a highscore

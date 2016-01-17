@@ -1,4 +1,8 @@
 <?php
+	session_start();
+	$_SESSION['username']=htmlspecialchars($_POST['username']);
+	$_SESSION['password']=htmlspecialchars($_POST['password']);
+	$_SESSION['usertype']=htmlspecialchars($_POST['usertype']);
 	include '/var/www/html/Matching-Game/assets/checkcredentials.php';
 	if($output==104)
 		die("invalid credentials");
@@ -22,6 +26,15 @@
   		</style>
 	</head>
 	<body style="text-align:center;">
+		<div id="menu" style="z-index:9999;width:100%;height:100%;background-color:#fff;font-size:160%;position:fixed;top:0px;left:0px;">
+			<input type="button" id="srbtn" value="play" onclick="srbtnclick()"/><input type="button" id="backbtn" value="back" onclick="history.back();"/>
+			<br>
+			<div id="score">
+			</div>
+			<br>
+			<br>
+
+		</div>
 		<div>arrange the elements of col2 by drag and drop vertically to match the elements in col1</div>
 		<br>
 		<br>
@@ -34,33 +47,39 @@
 		<div style="float:left;width:50%;">
 			column2
 			<br>
-				<ul id="c2list">
-				</ul>
+			<ul id="c2list">
+			</ul>
 		</div>
 		<br>
 		<br>
 		<br>
 		<input type="button" id="submitbtn" value="submit" onclick="submitbtnclicked()"/>
-		<br>
-		<br>
-		<div id="score">
-		</div>
 		<script>
-			var col1=[];
-			var col2=[];
-			var printed=[];
-			var c1=document.getElementById('c1list');
-			var c2=document.getElementById('c2list');
-			var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-	            if(xhttp.readyState == 4 && xhttp.status == 200) {
-	                var response = xhttp.responseText;
-	                parseAndPrint(response);
-	            }
-            }       
-        	xhttp.open("GET", "getPairs.php", true);
-        	xhttp.send();
+			function hidemenu(){$("#menu").hide('fast');}
+			function showmenu(){$("#menu").show('fast');}
+		</script>
+		<script>
+			var cc2;
 			
+			function refreshpairs(){
+				var col1=[];
+				var col2=[];
+				var printed=[];
+				var c1=document.getElementById('c1list');
+				var c2=document.getElementById('c2list');
+				c1.innerHTML="";
+				c2.innerHTML="";
+				var xhttp = new XMLHttpRequest();
+	            xhttp.onreadystatechange = function() {
+		            if(xhttp.readyState == 4 && xhttp.status == 200) {
+		                var response = xhttp.responseText;
+		                parseAndPrint(response,col1,col2,c1,c2,printed);
+		            }
+	            }       
+	        	xhttp.open("GET", "getPairs.php", true);
+	        	xhttp.send();
+			}
+
         	function printhtml(name,type,htmlelement,ID){
         		
         		if(type=="audio"){
@@ -77,12 +96,12 @@
         		}
         	}
 
-			function parseAndPrint(response){
+			function parseAndPrint(response,col1,col2,c1,c2,printed){
 				var pieces1 = response.split(";;;");
 				var index=0;
 
 				//parsing and making the arrays of col1 and col2 data
-				c1.innerHTML+="<ul>";
+				//c1.innerHTML+="<ul>";
 				while(index<(pieces1.length-1)){
 					var pieces2=pieces1[index].split("::");
 					col1.push(pieces2[0]);
@@ -93,7 +112,8 @@
 					col2.push(pieces2[1]);
 					index++;
 				}
-				c1.innerHTML+="</ul>";
+				cc2=col2;
+				//c1.innerHTML+="</ul>";
 				//printing
 				index=0;
 				var count=-1;
@@ -136,15 +156,54 @@
 				while(index<5){
 					var onpage = $("#c2list li:nth-child("+(index+1)+") div").data("src");
 					
-					var actual=col2[index].split(";;");
+					var actual=cc2[index].split(";;");
 					var actual=actual[0];
 					//document.getElementById('score').innerHTML+=" :: "+actual+" :: ";
 					if(actual==onpage)
 						score++;
 					index++;
 				}
-				document.getElementById('score').innerHTML=score;
+				showmenu();
+				document.getElementById('score').innerHTML="YOUR SCORE IS :"+score;
+				updateplayerprofile(score);
+				addgametodatabase(score);
 			}
+
+			function updateplayerprofile(score){
+				var xhttp = new XMLHttpRequest();
+	            xhttp.onreadystatechange = function() {
+		            if(xhttp.readyState == 4 && xhttp.status == 200) {
+		                var response = xhttp.responseText;
+		                if(response==107){
+	                       	$("#score").append("<br>you made a highscore , profile updated");
+	                    }
+	                    if(response==106){
+	                       	$("#score").append("<br>profile updatd");
+	                    }
+	                    if(response==103)
+	                        	alert("query returning zero , contact admin");
+		            }
+	            }       
+	        	xhttp.open("GET", "updateplayerprofile.php?score="+score, true);
+	        	xhttp.send();	
+			}
+
+			function addgametodatabase(score){
+				var xhttp = new XMLHttpRequest();
+	            xhttp.onreadystatechange = function() {
+		            if(xhttp.readyState == 4 && xhttp.status == 200) {
+		                var response = xhttp.responseText;
+		                 if(response==102){
+	                       	$("#score").append("<br>game added");
+	                    }
+	                    if(response==103)
+	                        	alert("query returning zero , contact admin");
+		            }
+	            }       
+	        	xhttp.open("GET", "addgametodatabase.php?score="+score, true);
+	        	xhttp.send();
+			}
+			function srbtnclick(){hidemenu();refreshpairs();$('#srbtn').attr('value','replay');}
 		</script>
 		<script>
 			$("document").ready(function(){

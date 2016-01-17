@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -92,6 +96,7 @@
 	                        if(response==103)
 	                        	alert("query returning zero , contact admin");
 	                        if(response==102){
+
 	                        	$("#loginform").attr("action",usertype.val()+"/"+usertype.val()+"home.php");
 	                        	$("#loginform").submit();
 	                        }
