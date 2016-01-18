@@ -1,6 +1,7 @@
 <?php
+	//////////////////////////// Function used ///////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	function extension($type) {
+	function extension($type) {  //For Respective Extensions
 		if($type=="audio")
 			$ext = ".mp3";
 		if($type=="video")
@@ -10,7 +11,7 @@
 		return $ext;
 	}	
 
-	function udpate_database($value='',$type='') {
+	function udpate_database($value='',$type='') { // Update Database accordingly
 		$targetdir = "/var/www/html/Matching-Game/assets/".$type."/";
 		$value = chop($value,extension($type));
 		$cnt = substr($value,5);
@@ -40,7 +41,7 @@
 		}
 	}
 
-	function getfilename($type){
+	function getfilename($type){		// Getting Respective Filename from Database
 		
 		include '/var/www/html/Matching-Game/assets/getconfig.php';
 		$conn = new mysqli("localhost",$sqlun,$sqlp,"matchinggame");
@@ -68,8 +69,9 @@
 		}
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	include '/var/www/html/Matching-Game/assets/getconfig.php';
-	$conn = new mysqli("localhost",$sqlun,$sqlp,"matchinggame");
+	$conn = new mysqli("localhost",$sqlun,$sqlp,"matchinggame");// Connecting to database
 	if($conn->connect_error) die ("Connection Failed:".$conn->connect_error);
 	$c1name;$c2name;
 	$c1filetype=$_POST['c1filetype'];//file types
@@ -80,8 +82,9 @@
 	$row=mysqli_fetch_row($result);
 	$cmp = $row[0];
 	$targetdir = "/var/www/html/Matching-Game/assets/";
+	$check = 0;
 
-	if($c1filetype!="same")
+	if($c1filetype!="same")  // Executes when user changes in column I
 	{
 		$first = $row[0];
 		$firsttype = $row[1];
@@ -114,7 +117,8 @@
 		if($secondtype!="text")
 		{
 	    	$c2name=getfilename($secondtype);
-	    	if($c1name==$c2name)
+	    	$value = chop($c1name,extension($firsttype));
+	    	if($value==$c2name)
 	    	{
 	    		$cnt = substr($value,5);
 	    		$cnt++;
@@ -126,30 +130,82 @@
 		}
 	    $query = "insert into pairs values('$c1name','$c1filetype','$second','$secondtype')";
 		$result = $conn->query($query);   
-		$cmp = $c1name; 
+		$cmp = $c1name;
+		$check = 1;
 	}
-	if($c2filetype!="same")
+	if($c2filetype!="same")   // Executes when user changes in column II
 	{
-		$query="SELECT * FROM pairs WHERE c1name='$cmp'";
+		
+		$query="SELECT * FROM pairs WHERE c1name='$cmp'";  // Querying  from database
 		$result=$conn->query($query);
-		if($row[3]!="text")
-		{
-			$path = "/var/www/html/Matching-Game/assets/".$row[3]."/".$row[2];
-			if(unlink($path)) echo "File Deleted<br><br>";	
+		$row=mysqli_fetch_row($result);
+
+		if($check==1) {  // If Upper code Executes
+			if($row[3]!="text")
+			{
+				$path = "/var/www/html/Matching-Game/assets/".$row[3]."/".$row[2];
+				if(unlink($path)) echo "File Deleted<br><br>";	
+			}
+			if($c2filetype!="text")
+			{
+				$exts=pathinfo($_FILES['c2file']['name'],PATHINFO_EXTENSION);
+				$c2name=getfilename($c2filetype);
+				$c2name=$c2name.".".$exts;
+				$targetfile =$targetdir.$c2filetype."/".$c2name;
+				if (move_uploaded_file($_FILES["c2file"]["tmp_name"],$targetfile))
+					echo "<br>The file has been uploaded<br>";
+	   			else die("<br>Sorry, there was an error uploading the file.<br>");
+			}
+			else $c2name=$_POST['c2name'];
+			$query = "UPDATE pairs SET c2name='$c2name',c2type='$c2filetype' WHERE c1name='$cmp'";
+			$result = $conn->query($query);
 		}
-		if($c2filetype!="text")
-		{
-			$exts=pathinfo($_FILES['c2file']['name'],PATHINFO_EXTENSION);
-			$c2name=getfilename($c2filetype);
-			$c2name=$c2name.".".$exts;
-			$targetfile =$targetdir.$c2filetype."/".$c2name;
-			if (move_uploaded_file($_FILES["c2file"]["tmp_name"],$targetfile))
-				echo "<br>The file has been uploaded<br>";
-	   		else die("<br>Sorry, there was an error uploading the file.<br>");
+		else{                         // Else this one executes
+			$first = $row[0];
+			$firsttype = $row[1];
+			$second = $row[2];
+			$secondtype = $row[3];
+			if($row[3]!="text")
+			{
+				$path = "/var/www/html/Matching-Game/assets/".$row[3]."/".$row[2];
+				if(unlink($path)) echo "File Deleted<br><br>";	
+			}
+			if($first!="text")
+				rename($targetdir.$firsttype."/".$first,$targetdir.$firsttype."/"."temp".extension($firsttype));
+			$query="DELETE from pairs WHERE c1name='$row[0]'";
+			$result=$conn->query($query);
+			if($firsttype!="text")
+				udpate_database($first,$firsttype);
+			if(($firsttype!=$secondtype) && $secondtype!="text")
+				udpate_database($second,$secondtype);	
+			if($firsttype!="text")
+			{
+				$c1name=getfilename($firsttype);
+				$c1name=$c1name.extension($firsttype);
+				rename($targetdir.$firsttype."/"."temp".extension($firsttype),$targetdir.$firsttype."/".$c1name);
+			}
+			else $c1name = $first;
+			if($c2filetype!="text")
+			{
+	    		$c2name=getfilename($c2filetype);
+	    		$value = chop($c1name,extension($firsttype));
+	    		if($value==$c2name)
+	    		{
+	    			$cnt = substr($value,5);
+	    			$cnt++;
+	    			$c2name = $c2filetype.$cnt;
+	    		}
+	    		$exts = pathinfo($_FILES['c2file']['name'],PATHINFO_EXTENSION);
+	    		$c2name=$c2name.".".$exts;
+	    		$targetfile =$targetdir.$c2filetype."/".$c2name;
+				if (move_uploaded_file($_FILES["c2file"]["tmp_name"],$targetfile))
+					echo "<br>The file has been uploaded<br>";
+	   			else die("<br>Sorry, there was an error uploading the file.<br>");
+			}
+			else $c2name = $_POST['c2name'];
+	   		$query = "insert into pairs values('$c1name','$firsttype','$c2name','$c2filetype')";
+			$result = $conn->query($query); 
 		}
-		else $c2name=$_POST['c2name'];
-		$query = "UPDATE pairs SET c2name='$c2name',c2type='$c2filetype' WHERE c1name='$cmp'";
-		$result = $conn->query($query);
 	}
 	echo "Successfully Updated! <br><br>";
 

@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Update Pairs</title>
+	<title>Delete Pairs</title>
 </head>
 <body>
-<h1 align="center">EDIT PAIRS</h1><br>
+<h1 align="center">DELETE PAIRS</h1><br>
 <center>
-	<form id="box" action="editpair.php" method="post">
+	<form id="box" action="delete.php" method="post">
 		<br>Select Type : <br><br>
 
 		<?php
-
+			////////////////////////////////////////////Functions Used ////////////////////////////////////////////////
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
 			function extension($type) {
 				if($type=="audio")
 					$ext = ".mp3";
@@ -50,8 +51,10 @@
 					}				
 				}
 			}
+			///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-			include '/var/www/html/Matching-Game/assets/getconfig.php';
+
+			include '/var/www/html/Matching-Game/assets/getconfig.php'; // Connecting to Database
 
 			$conn = new mysqli("localhost",$sqlun,$sqlp,"matchinggame");
 			if($conn->connect_error){
@@ -67,7 +70,6 @@
 					if($row[1]!="text")
 					{
 						$path = "/var/www/html/Matching-Game/assets/".$row[1]."/".$row[0];
-						//echo $path;
 						if(unlink($path)) echo "File Deleted<br><br>"; 
 						$type1 = $row[1];
 					}
@@ -85,63 +87,6 @@
 					if(($type1!=$type2) && $type2!="")
 						udpate_database($col2,$type2);
 			}
-			if($option=="Edit")
-			{
-					$query="SELECT * FROM pairs WHERE c1name='$col'";
-					$result=$conn->query($query);
-					$row=mysqli_fetch_row($result);
-					echo '<form id="update" action="editpair.php" method="post">';
-					if($row[1]=="text")
-						echo '<input type="text" name="edit1" value="'.$row[0].'"><br><br>';
-					else echo '<input type="file" name="edit1"><br><br>';
-					if($row[3]=="text")
-						echo '<input type="text" name="edit2" value="'.$row[2].'"><br><br>';
-					else echo '<input type="file" name="edit2"><br><br>';
-					echo '<input type="hidden" name="key" value="'.$col.'"></input>';
-					echo '<input type="submit" name="submit" value="Update"></input><br><br>';
-					echo '</form>';					
-			}
-			if($option=="Update")
-			{
-				$key = $_POST['key'];
-				$query="SELECT * FROM pairs WHERE c1name='$key'";
-				$result=$conn->query($query);
-				$row=mysqli_fetch_row($result);
-				$cmp = $row[0];
-				if($row[1]=="text")
-				{
-					$value = $_POST['edit1'];
-					$query = "UPDATE pairs SET c1name='$value' WHERE c1name='$row[0]'";
-					$res = $conn->query($query);
-					$cmp = $value;
-				}
-				else{
-					$exts=pathinfo($_FILES['edit1']['name'],PATHINFO_EXTENSION);
-					echo $exts;
-					if($exts!=""){
-						$path = "/var/www/html/Matching-Game/assets/".$row[1]."/".$row[0];
-						if (move_uploaded_file($_FILES["edit1"]["tmp_name"],$targetfilec2))
-							echo "<br>The file has been uploaded.";
-	    				else die("<br>Sorry, there was an error uploading the file.<br>");	
-					}
-				}
-				if($row[3]=="text")
-				{
-					$value = $_POST['edit2'];
-					$query = "UPDATE pairs SET c2name='$value' WHERE c1name='$cmp'";
-					$res = $conn->query($query);
-				}
-				else{
-					$exts=pathinfo($_FILES['edit2']['name'],PATHINFO_EXTENSION);
-					if($exts!=""){
-						$path = "/var/www/html/Matching-Game/assets/".$row[3]."/".$row[2];
-						if (move_uploaded_file($_FILES["edit2"]["tmp_name"],$path))
-							echo "<br>The file has been uploaded.";
-	    				else die("<br>Sorry, there was an error uploading the file.<br>");	
-					}
-				}
-				echo "Successfully Updated! <br><br>";
-			}
 			$query="SELECT * from pairs";
 			$result=$conn->query($query);
 			echo '<select name="pair">';
@@ -152,7 +97,7 @@
 			mysqli_free_result($result);
 		?>
 
-  		<br><br><input type="submit" name="submit" value="Edit"><input type="submit" name="submit" value="Delete">
+  		<br><br><input type="submit" name="submit" value="Delete">
 	</form>
 
 </center>

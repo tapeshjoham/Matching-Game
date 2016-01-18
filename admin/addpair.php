@@ -30,7 +30,6 @@ Note - Command for MySQL is different for mine ...check if its working
 			}
 		}
 	}
-	getfilename('audio');
 	$c1name;$c2name;
 	$c1filetype=$_POST['c1filetype'];//file types
 	$c2filetype=$_POST['c2filetype'];
@@ -89,7 +88,7 @@ Note - Command for MySQL is different for mine ...check if its working
 	if($conn->connect_error){
 		die ("Connection Failed:".$conn->connect_error);
 	}
-	$query = "insert into pairs values('$c1name','$c1filetype','$c2name','$c2filetype','admin1')";
+	$query = "insert into pairs values('$c1name','$c1filetype','$c2name','$c2filetype')";
 	$result = $conn->query($query);//running sql query
 	if($result){
 		echo "<br>database successfully updated<br>";

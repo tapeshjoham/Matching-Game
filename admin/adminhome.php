@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD
 <?php
-	session_start();
+	/*session_start();
 	$_SESSION['username']=htmlspecialchars($_POST['username']);
 	$_SESSION['password']=htmlspecialchars($_POST['password']);
 	$_SESSION['usertype']=htmlspecialchars($_POST['usertype']);
@@ -9,10 +9,10 @@
 	if($output==104)
 		die("invalid credentials");
 	if($output==103)
-		die("permission denied");
+		die("permission denied");*/
 ?>
 =======
->>>>>>> 7dfe86c24862b89acae14fc7f8c1c423429473d4
+>>>>>>> 7dfe86c24862b89acae14fc7f8c1c423429473d4 -->
 <!DOCTYPE html>
 <html>
 	<head>
