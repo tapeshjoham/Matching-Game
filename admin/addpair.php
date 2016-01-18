@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 /*
 Note - Command for MySQL is different for mine ...check if its working 
 */
@@ -89,7 +90,7 @@ Note - Command for MySQL is different for mine ...check if its working
 	if($conn->connect_error){
 		die ("Connection Failed:".$conn->connect_error);
 	}
-	$query = "insert into pairs values('$c1name','$c1filetype','$c2name','$c2filetype','admin1')";
+	$query = "insert into pairs values('$c1name','$c1filetype','$c2name','$c2filetype','".$_SESSION['username']."')";
 	$result = $conn->query($query);//running sql query
 	if($result){
 		echo "<br>database successfully updated<br>";

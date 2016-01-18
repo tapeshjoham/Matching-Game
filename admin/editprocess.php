@@ -2,11 +2,11 @@
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	function extension($type) {
 		if($type=="audio")
-			$ext = ".mp3";
+			$ext = ".ogg";
 		if($type=="video")
 			$ext = ".mp4";
 		if($type=="image")
-			$ext = ".png";
+			$ext = ".jpg";
 		return $ext;
 	}	
 
@@ -124,7 +124,7 @@
 	    	rename($targetdir.$secondtype."/"."temp".extension($secondtype),$targetdir.$secondtype."/".$c2name);
 	    	$second = $c2name;
 		}
-	    $query = "insert into pairs values('$c1name','$c1filetype','$second','$secondtype')";
+	    $query = "insert into pairs values('$c1name','$c1filetype','$second','$secondtype','admin1')";
 		$result = $conn->query($query);   
 		$cmp = $c1name; 
 	}

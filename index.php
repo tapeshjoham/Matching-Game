@@ -1,12 +1,8 @@
-
-
-
-
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>
-			login
+			Matching-Game | login
 		</title>
 		<style>
 		</style>
@@ -17,13 +13,16 @@
 		</script>
 	</head>
 	<body>
-
-		<div id="maindiv" style="text-align:center;display:flex;align-items:center;width:100%;">
-			<div style="width:100%;">
-				login
-				<br>
-				<br>
-
+		
+		
+		<div id="maindiv" style="margin:0;padding:0;text-align:center;width:100%;">
+				<img src="assets/logo.png" style="background:#3f51b5;box-shadow:0px 2px 5px rgba(0,0,0,0.5);padding:4px;border-radius:50%;"/>
+			<h1 style="color:#3f51b5;">Matching Game</h1>
+		
+			<div id="maindivchild" style="width:100%;display:inline-block;margin-left:auto;margin-right:auto;">
+	
+				<h4>login</h4>
+				
 				<form method="post" id="loginform">
 					<input type="radio" name="usertype" value="player" id="playerradiobtn" checked>
 					<label for="playerradiobtn">PLAYER</label> 
@@ -33,12 +32,12 @@
 					
 					<br>
 					<br>
+
 					<div class="inputdiv">
 						<input type="text" name="username" id="username" maxlength="20" placeholder="username"/>
 						<br>
 						<span id="usernameerror" class="inputerror"></span>
 					</div>
-					<br>
 					<br>
 					<div class="inputdiv">
 						<input type="password" name="password" id="password" maxlength="20" placeholder="password"/>
@@ -53,8 +52,10 @@
 			</div>
 		</div>		
 		<script>
+
+			$("#maindiv").css('padding-top',$("#heading").height());
 			//setting height of divs for proper positioning
-			$("#maindiv").css('min-height',$(window).height()+"px");
+			$("#maindiv").css('min-height',($(window).height()-$("#heading").height())+"px");
 			$(".inputdiv").css('width',$("input[type=text]").width()+"px");
 
 			//adding event listeners to radiobuttons or disabling enabling signup btn
@@ -64,6 +65,7 @@
 			$("#adminradiobtn").click(function(){
 				$("#signupbtn").prop("disabled",true);
 			});
+			$("input[type=button]").css('width',$("#maindivchild").width()*0.103);
 		</script>
 		<script>
 			//setting input error checks and onclick listeners

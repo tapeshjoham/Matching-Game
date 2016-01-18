@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <?php
 	session_start();
 	$_SESSION['username']=htmlspecialchars($_POST['username']);
@@ -11,8 +11,7 @@
 	if($output==103)
 		die("permission denied");
 ?>
-=======
->>>>>>> 7dfe86c24862b89acae14fc7f8c1c423429473d4
+
 <!DOCTYPE html>
 <html>
 	<head>
