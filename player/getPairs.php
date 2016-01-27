@@ -1,5 +1,7 @@
 <?php
-	include "/var/www/html/Matching-Game/assets/getconfig.php";
+	include "getpath.php";
+
+	include $localhost."Matching-Game/assets/getconfig.php";
 	$conn=mysqli_connect("localhost",$sqlun,$sqlp,"matchinggame");
 	if($conn->connect_error)
     	die("Connection to database failed: ".$conn->connect_error);

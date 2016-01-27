@@ -1,10 +1,11 @@
 <?php
+    include "getpath.php";
 
 	$username = htmlspecialchars($_POST['username']);
 	$password = htmlspecialchars($_POST['password']);
 
 	//creating sql un and pass
-	include "/var/www/html/Matching-Game/assets/getconfig.php";
+	include $localhost."Matching-Game/assets/getconfig.php";
 
 	$conn=mysqli_connect("localhost",$sqlun,$sqlp,"matchinggame");
 	if($conn->connect_error){

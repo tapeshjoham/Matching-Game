@@ -1,13 +1,16 @@
 
 <?php
 
+    include "getpath.php";
+
 	$username = htmlspecialchars($_POST['username']);
 	$password = htmlspecialchars($_POST['password']);
     $usertype = htmlspecialchars($_POST['usertype']);
 
     $output=0;
-	//creating sql un and pass
-	include "/var/www/html/Matching-Game/assets/getconfig.php";
+
+    //creating sql un and pass
+	include $localhost."Matching-Game/assets/getconfig.php";
 
 	$conn=mysqli_connect("localhost",$sqlun,$sqlp,"matchinggame");
 	if($conn->connect_error){

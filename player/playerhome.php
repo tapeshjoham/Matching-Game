@@ -1,9 +1,11 @@
 <?php
+	include "getpath.php";
+
 	session_start();
 	$_SESSION['username']=htmlspecialchars($_POST['username']);
 	$_SESSION['password']=htmlspecialchars($_POST['password']);
 	$_SESSION['usertype']=htmlspecialchars($_POST['usertype']);
-	include '/var/www/html/Matching-Game/assets/checkcredentials.php';
+	include $localhost.'Matching-Game/assets/checkcredentials.php';
 	if($output==104)
 		die("invalid credentials");
 	if($output==103)

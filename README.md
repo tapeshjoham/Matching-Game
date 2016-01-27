@@ -18,7 +18,7 @@ NOTE :
 [4] dont change mysql commands to old one, its takes much work to change them back
 
 player side :-
-(being done by ashish)
+(being done by amanshu)
 
 admin side :-
 [1] basic function of admin ui is to add,delete,edit pairs(being done by tapesh) 
@@ -41,6 +41,7 @@ c1type varchar(10)
 c2name varchar(200)
 c2type varchar(10)
 adminusername varchar(20)
+id int
 
 [2] playeraccount
 username varchar(20)
@@ -69,3 +70,24 @@ OUTPUTS :-
 105 - error in table transactions , contact admin , invalid sql pass or un or dbname
 106 - player current score is not greater than highscore
 107 - player made a highscore
+
+SUPPORTED FILE FORMATS :
+image - jpg , jpeg , png , gif
+video - mp4
+audio - mp3 , wav , ogg
+
+CONFIG FILE :- (config.txt)
+[1] sql_username
+[2] sql_password
+[3] sql_database 
+
+LOCALHOST-PATH FILE :- (path.txt) (present in every directory and sub-directory)
+[1] localhost_path
+
+SETTINGS :-
+[1] sql username
+[2] sql password
+[3] sql database
+[4] localhost path
+[5] no of pairs shown to player
+[6] 

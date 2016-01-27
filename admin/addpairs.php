@@ -1,14 +1,13 @@
+
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Update Pairs</title>
-</head>
-<body>
-<h1 align="center">UPDATE PAIRS</h1><br>
-<center>
-	<form id="box" action="editprocess.php" method="post" enctype="multipart/form-data">
-		<br>Select Type : <br><br>	
-
+	<head>
+		<title>
+			admin | home
+		</title>
+	</head>
+	<body style="text-align:center;">
+		<form name="form1" id="form1" method="post" action="addpair.php" enctype="multipart/form-data">
 			<div style="float:left;width:50%">
 				column1
 				<br>
@@ -17,7 +16,6 @@
 				<input type="radio" name="c1filetype" value="audio"/>audio<br>
 				<input type="radio" name="c1filetype" value="video"/>video<br>
 				<input type="radio" name="c1filetype" value="image"/>image<br>
-				<input type="radio" name="c1filetype" value="same"/>Remain Same<br>
 				<br>
 				<br>
 				<input type="file" name="c1file" id="c1file" style="width:200px;"/>
@@ -33,7 +31,6 @@
 				<input type="radio" name="c2filetype" value="audio"/>audio<br>
 				<input type="radio" name="c2filetype" value="video"/>video<br>
 				<input type="radio" name="c2filetype" value="image"/>image<br>
-				<input type="radio" name="c2filetype" value="same"/>Remain Same<br>
 				<br>
 				<br>
 				<input type="file" name="c2file" id="c2file" style="width:200px;"/>
@@ -41,28 +38,26 @@
 				<br>
 				<input type="text" name="c2name" id="c2text"/>
 			</div>
-
-	<?php
-			include '/var/www/html/Matching-Game/assets/getconfig.php';
-
-			$conn = new mysqli("localhost",$sqlun,$sqlp,"matchinggame");
-			if($conn->connect_error){
-				die ("Connection Failed:".$conn->connect_error);
+			<br>
+			<br>
+			<br>
+			<input type="submit" id="submitbtn" value="submit"/>
+		</form>	
+		<script>
+			var column1=document.getElementById('column1');
+			var column2=document.getElementById('column2');
+			function submitbtnclicked(){
+				var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+	                if(xhttp.readyState == 4 && xhttp.status == 200) {
+	                    var response = xhttp.responseText;
+	                    if(response==1)
+	                    	alert("success");
+	                }
+                }       
+        		xhttp.open("GET", "addpair.php?c1="+column1.value+"&c2="+column2.value+"", true);
+        		xhttp.send();
 			}
-			$query="SELECT * from pairs";
-			$result=$conn->query($query);
-			echo '<select name="pair">';
-			while ($row=mysqli_fetch_row($result)) {
-					echo'<option value="'.$row[0].'">'.$row[0].' /// '.$row[2].'<br>';
-			}
-			echo '</select>';
-			mysqli_free_result($result);
-	?>
-
-  		
-		<br><br><input type="submit" name="submit" value="Update">
-	</form>
-
-</center>
-</body>
+		</script>
+	</body>
 </html>

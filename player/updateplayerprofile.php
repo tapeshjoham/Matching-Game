@@ -1,4 +1,6 @@
 <?php
+    include "getpath.php";
+
     session_start();
     $score=$_GET['score'];
 	$username=$_SESSION['username'];
@@ -6,7 +8,7 @@
     $gamesplayed=0;
 
     //creating sql un and pass
-	include "/var/www/html/Matching-Game/assets/getconfig.php";
+	include $localhost."Matching-Game/assets/getconfig.php";
 
 	$conn=mysqli_connect("localhost",$sqlun,$sqlp,"matchinggame");
 	if($conn->connect_error){

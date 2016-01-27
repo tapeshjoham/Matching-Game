@@ -1,13 +1,13 @@
 
 <?php
-
+    include "getpath.php";
 	$username = $_SESSION['username'];
 	$password = $_SESSION['password'];
     $usertype = $_SESSION['usertype'];
 
     $output=0;
 	//creating sql un and pass
-	include "/var/www/html/Matching-Game/assets/getconfig.php";
+	include $localhost."Matching-Game/assets/getconfig.php";
 
 	$conn=mysqli_connect("localhost",$sqlun,$sqlp,"matchinggame");
 	if($conn->connect_error){

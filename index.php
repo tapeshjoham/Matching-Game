@@ -13,10 +13,8 @@
 		</script>
 	</head>
 	<body>
-		
-		
 		<div id="maindiv" style="margin:0;padding:0;text-align:center;width:100%;">
-				<img src="assets/logo.png" style="background:#3f51b5;box-shadow:0px 2px 5px rgba(0,0,0,0.5);padding:4px;border-radius:50%;"/>
+			<img src="assets/logo.png" style="background:#3f51b5;box-shadow:0px 2px 5px rgba(0,0,0,0.5);padding:4px;border-radius:50%;"/>
 			<h1 style="color:#3f51b5;">Matching Game</h1>
 		
 			<div id="maindivchild" style="width:100%;display:inline-block;margin-left:auto;margin-right:auto;">
