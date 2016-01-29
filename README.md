@@ -90,4 +90,4 @@ SETTINGS :-
 [3] sql database
 [4] localhost path
 [5] no of pairs shown to player
-[6] 
+[6] active or not

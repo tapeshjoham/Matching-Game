@@ -20,7 +20,7 @@
 		include $localhost.'Matching-Game/assets/getconfig.php';
 		$conn = new mysqli("localhost",$sqlun,$sqlp,$sqld);
 		if($conn->connect_error){
-			die ("Connection Failed:".$conn->connect_error);
+			die ("Connection Failed:".$conn->connect_error."::;;error!");
 		}
 		
 		$query="SELECT * from pairs where id>$id ";
@@ -54,7 +54,7 @@
 		include $localhost.'Matching-Game/assets/getconfig.php';
 		$conn = new mysqli("localhost",$sqlun,$sqlp,$sqld);
 		if($conn->connect_error){
-			die ("Connection Failed:".$conn->connect_error);
+			die ("Connection Failed:".$conn->connect_error."::;;error!");
 		}
 
 		$query="UPDATE pairs SET id=id-1 WHERE id>$id ";
@@ -73,7 +73,7 @@
 
 	$conn = new mysqli("localhost",$sqlun,$sqlp,$sqld);
 	if($conn->connect_error){
-		die ("Connection Failed:".$conn->connect_error);
+		die ("Connection Failed:".$conn->connect_error."::;;error!");
 	}
 
 	$pairid = $_POST['pairid'];
@@ -115,6 +115,8 @@
 		udpate_database($col2,$type2,$pairid);
 
 	update_id($pairid);
+
+	echo "::;;deletion complete";
 ?>
 
   		

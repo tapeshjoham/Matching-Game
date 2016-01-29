@@ -30,7 +30,12 @@
 			if($exts=="jpg"||$exts=="jpeg"||$exts=="png"||$exts=="gif")
 				return 1;
 		if($type=="text")
-			return 1;
+			if($_POST['c1name']==""||$_POST['c2name']==""){
+				echo "<br>[process]:text boxes are empty<br>";
+				return 0;
+			}
+			else
+				return 1;
 		if($type=="same")
 			return 1;
 
@@ -78,7 +83,7 @@
 	function getfilename($type){
 		include "getpath.php";		
 		include $localhost.'Matching-Game/assets/getconfig.php';
-		$conn = new mysqli("localhost",$sqlun,$sqlp,"matchinggame");
+		$conn = new mysqli("localhost",$sqlun,$sqlp,$sqld);
 		if($conn->connect_error){
 			die ("Connection Failed:".$conn->connect_error);
 		}
@@ -141,13 +146,13 @@
 	$chkf2=checkfile("c2file",$c2filetype);
 
 	if(!($chkf1!=0&&$chkf2!=0))
-		die("<br>aborting process<br>");
+		die("<br>aborting process<br>::;;error!");
 
 	include $localhost.'Matching-Game/assets/getconfig.php';
 	
-	$conn = new mysqli("localhost",$sqlun,$sqlp,"matchinggame");// Connecting to database
+	$conn = new mysqli("localhost",$sqlun,$sqlp,$sqld);// Connecting to database
 	if($conn->connect_error) 
-		die ("Connection Failed:".$conn->connect_error);
+		die ("Connection Failed:".$conn->connect_error."::;;error!");
 	
 	$query="SELECT * FROM pairs WHERE id=$pairid";
 	$result=$conn->query($query);
@@ -202,7 +207,7 @@
 			if (move_uploaded_file($_FILES["c1file"]["tmp_name"],$targetfile))
 				echo "<br>[process]:file has been uploaded $targetfile<br>";
 	   		else 
-	   			die("<br>[process]:there was an error uploading the file<br>");
+	   			die("<br>[process]:there was an error uploading the file<br>::;;error!");
 		}
 		else 
 			$c1name = $_POST['c1name'];
@@ -283,7 +288,7 @@
 				if (move_uploaded_file($_FILES["c2file"]["tmp_name"],$targetfile))
 					echo "<br>[process]:file uploaded $targetfile<br>";
 	   			else 
-	   				die("<br>[process]:there was an error uploading the file.<br>");
+	   				die("<br>[process]:there was an error uploading the file.<br>::;;error!");
 			}
 
 			else 
@@ -362,7 +367,7 @@
 				if (move_uploaded_file($_FILES["c2file"]["tmp_name"],$targetfile))
 					echo "<br>[process]:file uploaded $targetfile<br>";	
 	   			else 
-	   				die("<br>[process]:there was an error uploading the file.<br>");
+	   				die("<br>[process]:there was an error uploading the file.<br>::;;error!");
 			}
 			else 
 				$c2name = $_POST['c2name'];
@@ -378,6 +383,6 @@
 			echo "<br>[process]:pair inserted into database<br>";	 
 		}
 	}
-	echo "<br>[process]:process of editing complete<br>";	
+	echo "<br>[process]:process of editing complete<br>::;;editing complete!";	
 
 ?>

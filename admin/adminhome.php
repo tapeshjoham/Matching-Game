@@ -157,7 +157,7 @@
 				padding:12px;
 				
 				border-radius:50%;
-				width:26px;
+				width:20px;
 			}
 			.fab{
 				background:#2196F3;
@@ -170,23 +170,23 @@
 				cursor:pointer;
 			}
 			.fab:hover{
-				box-shadow:0px 4px 5px rgba(0,0,0,0.5);
+				box-shadow:0px 3px 10px rgba(0,0,0,0.5);
 			}
 			.fab:active{
 				box-shadow:0px 2px 5px rgba(0,0,0,0.5);
 				background-color: #1565C0;
 			}
+			
 			.pairelement{
-				height:300px;
 				display:flex;
 				align-items:center;
+				justify-content:center;
 				margin:0;
 				padding:0;
 				transition:background-color 0.3s;
 				cursor: pointer;
-				border-radius: 3px;
-				box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-				margin-bottom: 8px;
+				border-radius: 0;
+
 			}
 			.pairelement:hover{
 				background-color: #eee;
@@ -198,16 +198,47 @@
 				display:inline-block;
 				margin-left:auto;
 				margin-right:auto;
-				text-align: center;
-				
 			}
+			.mediaelement{
+				display: inline-block;
+				color: #2196F3;
+				background-color:#fff;
+				padding:16px;
+			}
+			.media{
+				margin:0;
+				padding:0;
+				width:200px;
+				height:200px;
+				display:flex;
+				align-items:center;
+				justify-content:center;
+				background-color:none;
+			}
+			.medianame{
+				font-size: 80%;
+				color: #555;
+			}
+			.mediatype{
+				font-size: 72%;
+				color:#777;
+			}
+			.compareimg{
+				border-radius: 50%;
+				height:26px;
+				padding:4px;
+				background-color:#bbb;
+				vertical-align: middle;
+				margin:16px;
+			}
+
 			.overlay{
 				position:fixed;
 				top:0;
 				left:0;
 				width:100%;
 				
-				background-color: rgba(0,0,0,0.8);
+				background-color: rgba(0,0,0,0.9);
 			}
 			.dialog{
 				position:fixed;
@@ -215,7 +246,7 @@
 				left:0;
 				width:100%;
 				
-				background-color: rgba(0,0,0,0.5);
+				background-color: rgba(0,0,0,0.9);
 				display: flex;
 				align-items:center;
 			}
@@ -245,29 +276,7 @@
 			.transparentfab:active{
 				background-color: rgba(0,0,0,0.6);
 			}
-			.mediaelement{
-				display: inline-block;
-				width:300px;
-				text-align: center;
-				font-size: 160%;
-				color: #2196F3;
-			}
-			.medianame{
-				font-size: 60%;
-				color: #555;
-			}
-			.mediatype{
-				font-family: roboto-light;
-				font-size: 60%;
-				color:#777;
-			}
-			.compareimg{
-				border-radius: 50%;
-				height:40px;
-				padding:8px;
-				background-color: rgba(0,0,0,0.5);
-				vertical-align: middle;
-			}
+			
 			.menuitem{
 				height:64px;display:flex;align-items:center;color: #555;cursor: pointer;transition:background-color 0.3s;
 			}
@@ -295,22 +304,17 @@
 				font-family: roboto-medium;
 				cursor: pointer;
 				transition:background-color 0.3s;
-				border-radius: 3px;
+				border-radius:0px;
 				color:#555;
-				background-color: rgba(0,0,0,0.1);
+				background-color: rgba(0,0,0,0);
 			}
 			.transparentbutton:hover{
-				background-color: rgba(0,0,0,0.2);
+				background-color: rgba(0,0,0,0.1);
 			}
 			.transparentbutton:active{
-				background-color: rgba(0,0,0,0.4);
+				background-color: rgba(0,0,0,0.2);
 			}
-			.paircolumn{
-				float:left;margin:8px;text-align:left;
-				border-radius: 1px;
-				border:1px solid rgba(0,0,0,0.1);
-				padding:4px;
-			}
+			
 			input[type=submit]{
 				color:#2196F3;;
 			}
@@ -340,12 +344,12 @@
 				padding:0;
 				transition:background-color 0.3s;
 				
-				border-radius: 3px;
-				box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
+				border-radius: 0px;
+				 	
 				margin-right: auto;
 				margin-left: auto;
 				margin-bottom: 16px;
-				background-color: #fafafa;
+				background-color: #fff;
 			}
 			.settingsvalue{
 				font-family: roboto-medium;
@@ -368,28 +372,82 @@
 				font-size: 80%;
 				color:#888;
 			}
+			audio{
+				width:200px;
+			}
+			hr{
+				margin:auto;
+				margin-top:8px;
+				margin-bottom:8px;
+				
+			}
+			img{
+				object-fit:contain;
+			}
+
+			.formdialog{
+				margin-right:auto;
+				margin-left:auto;
+				background-color:#fff;
+				border-radius:0px;
+				box-shadow:0px 2px 4px rgba(0,0,0,0.3);
+				text-align:right;
+			}
+			.paircolumn{
+				float:left;
+				margin:8px;
+				text-align:left;
+				border-radius: 0px;
+				border:1px solid #f0f0f0;
+				background-color:#fff;
+				padding:4px;
+			}
+			#userinfo{
+				margin:0;
+				padding:0;
+				position:fixed;
+				top:0px;
+				right:0px;
+				background:#2196F3;
+				display: flex;
+				align-items:center;
+				z-index:10;
+			}
 		</style>
 		<script src="/Matching-Game/assets/jquery.min.js">
 		</script>
 	</head>
 	<body>
+		<div id="userinfo">
+			<?php echo $_SESSION['username'];?>
+			<img src="/Matching-Game/assets/admin.png" style="padding:4px;margin:8px;" height="26px"/>
+		</div>
+		<div id="loading" class="overlay" style="z-index:200;display:flex;align-items:center;background-color:#ededed;">
+			<div style="margin-right:auto;margin-left:auto;text-align:center;color:#555;">
+				<img src="/Matching-Game/assets/loading.gif" height="100px" />
+				<br>
+				<font id="loadingtext">loading</font> . . .
+			</div>
+		</div>
+
 		<div id="process" class="overlay">
-			<div id="processchild" style="display:inline-block;margin-left:auto;margin-right:auto;background-color: #eee;border-radius:3px;box-shadow:0px 2px 4px rgba(0,0,0,0.3);padding:8px;">
-			<br><br><font id="processheading" style="font-size:160%;">PROCESSING...</font><br><br>
-			<img src="/Matching-Game/assets/loading.gif" height="100px"/><br><br>
+			<div id="processchild" class="formdialog" style="background-color:#f0f0f0;text-align:center;padding:16px;min-width:400px;">
+			<br><br><font id="processheading" style="font-size:140%;">processing...</font>
+			<br><br>
+			<img src="/Matching-Game/assets/loading.gif" height="80px"/>
+			<br><br>
+			-: PROCESS LOG :-<br>
+			<div id="processtext" style="background-color:#fff;display:inline-block;text-align:left;overflow-y:auto;height:100px;width:400px;">
 				
-			<div id="processtext" style="display:inline-block;text-align:left;overflow-y:auto;height:100px;">
-				-: PROCESS LOG :-<br>
 			</div>
 			<br>
 			<br>
 			<input type="button" value="Close" class="transparentbutton" onclick="processclose()"/>
 			<script>
 				function processclose(){
-					$('#process').hide('fast');
-					$('#process img').show('fast');
-					$('#processheading').text("PROCESSING...");
-					refreshpairs();
+					$('#process').fadeOut('fast');
+					$('#process img').show();
+					$('#processheading').text("processing...");
 				}
 			</script>
 			</div>
@@ -440,7 +498,7 @@
 		</div>
 
 		<div class="overlay" id="editpair">
-			<div style="margin-right:auto;margin-left:auto;background-color:#fafafa;border-radius:3px;box-shadow:0px 2px 4px rgba(0,0,0,0.3);text-align:right;">
+			<div class="formdialog">
 				<p style="text-align:left;padding:8px;margin:0;color:#555;">Edit pair</p>
 				<form id="editpairform" action="editprocess.php" method="post" enctype="multipart/form-data">
 					<input type="text" name="pairid" style="display:none"/>
@@ -474,13 +532,19 @@
 					<br>
 					<br>
 					<input type="submit" name="submit" class="transparentbutton" value="Update">
-					<input type="button" value="close" class="transparentbutton" onclick="$('#editpair').hide('fast')"/>
+					<input type="button" value="close" class="transparentbutton" onclick="editpairclose()"/>
+					<script>
+						function editpairclose(){
+							$('#editpair').fadeOut('fast');
+							refreshpairs();
+						}
+					</script>
 				</form>
 			</div>	
 		</div>
 
 		<div class="overlay" id="addpair">
-			<div style="margin-right:auto;margin-left:auto;background-color:#fafafa;border-radius:3px;box-shadow:0px 2px 4px rgba(0,0,0,0.3);text-align:right;">
+			<div class="formdialog">
 				<p style="text-align:left;padding:8px;margin:0;color:#555;">Add pair</p>
 				<form name="addpairform" id="addpairform" method="post" action="addpair.php" enctype="multipart/form-data">
 					<div class="paircolumn">
@@ -512,23 +576,30 @@
 					<br>
 					<input type="submit" id="submitbtn" class="transparentbutton" value="Submit" />
 					<input type="button" value="Close" class="transparentbutton" onclick="addpairclose()"/>
-					<script>function addpairclose(){$('#addpair').hide('fast');refreshpairs();}</script>
+
+					<script>
+						function addpairclose(){
+							$('#addpair').fadeOut('fast');
+							refreshpairs();
+						}
+					</script>
+
 				</form>
 			</div>
 		</div>
 		<div class="dialog" id="pairclicked">
-			<div class="pairelementchild" style="color:#555;margin-right:auto;margin-left:auto;background-color:#fafafa;border-radius:3px;box-shadow:0px 2px 4px rgba(0,0,0,0.3);">
+			<div class="pairelementchild" style="text-align:center;color:#555;margin-right:auto;margin-left:auto;background-color:#fff;box-shadow:0px 2px 4px rgba(0,0,0,0.3);">
 				<div class="editpairitem" onclick="editpairclicked()">
 					<img id="editpairbtn" src="/Matching-Game/assets/edit.png" class="pairfab" style="margin-right:8px;" />
-					EDIT
+					edit
 				</div>
 				<br>
 				<div class="editpairitem" onclick="deletepairclicked()">
 					<img id="deletepairbtn" src="/Matching-Game/assets/delete.png" class="pairfab" style="margin-right:8px;" />
-					DELETE
+					delete
 				</div>
 				<br>
-				<input class="transparentbutton" type="button" value="close" onclick="$('#pairclicked').hide('fast')"/>
+				<input class="transparentbutton" type="button" value="close" onclick="$('#pairclicked').fadeOut('fast')"/>
 			</div>
 		</div>
 		
@@ -545,7 +616,7 @@
 				function getmediaelement(name,type){
 					var ext=getext(name);
 					if(type=="audio"){
-        			return "<audio width=\"100px\" controls><source src=\"/Matching-Game/assets/audio/"+name+"\" type=\""+type+"/"+ext+"\"/></audio>";
+        			return "<audio controls><source src=\"/Matching-Game/assets/audio/"+name+"\" type=\""+type+"/"+ext+"\"/></audio>";
 	        		}
 	        		if(type=="video"){
 	        			return "<video width=\"200\" height=\"200\" controls><source src=\"/Matching-Game/assets/video/"+name+"\" type=\""+type+"/"+ext+"\"/></video>";
@@ -558,6 +629,8 @@
 	        		}
 				}
 				function refreshpairs(){
+					$("#loading").fadeIn(300);
+					$("#loadingtext").text("refreshing pairs");
 					$("#database").text("");
 					$("#database").append("Click on the pair to edit or delete :<br><br>");
 					var xhttp = new XMLHttpRequest();
@@ -571,26 +644,31 @@
 								var pieces3a=pieces2[0].split(";;");
 								var pieces3b=pieces2[1].split(";;");
 								
-								$("#database").append("<div class=\"pairelement\" onclick=\"pairclicked('"+pieces2[2]+"')\"><div class=\"pairelementchild\">"+
-									"<div class=\"mediaelement\">"+getmediaelement(pieces3a[0],pieces3a[1])+
-									"<br><font class=\"medianame\">"+pieces3a[0]+"</font><br>"+
+								$("#database").append("<div class=\"pairelement\" onclick=\"pairclicked('"+pieces2[2]+"')\">"+
+									"<div class=\"mediaelement\"><div class=\"media\">"+getmediaelement(pieces3a[0],pieces3a[1])+
+									"</div><hr>"+
+									"<font class=\"medianame\">"+pieces3a[0]+"</font><br>"+
 									"<font class=\"mediatype\">"+pieces3a[1]+"</font>"+"</div>"+
-									"<img class=\"compareimg\" src=\"/Matching-Game/assets/compare.png\"/>"+
-									"<div class=\"mediaelement\">"+getmediaelement(pieces3b[0],pieces3b[1])+
-									"<br><font class=\"medianame\">"+pieces3b[0]+"</font><br>"+
-									"<font class=\"mediatype\">"+pieces3b[1]+"</font>"+"</div>");
+									"<div style='display:inline-block;margin:0;padding:0;'><div class='cmpimgdiv' style='display:flex;align-items:center;'><img class=\"compareimg\" src=\"/Matching-Game/assets/compare.png\"/></div></div>"+
+									"<div class=\"mediaelement\"><div class=\"media\">"+getmediaelement(pieces3b[0],pieces3b[1])+
+									"</div><hr>"+
+									"<font class=\"medianame\">"+pieces3b[0]+"</font><br>"+
+									"<font class=\"mediatype\">"+pieces3b[1]+"</font>"+"</div>"+"</div><hr>");
 
 								index++;
 							}
+	                	$("#loading").fadeOut(300);
 	                	}
 	                }       
 			        xhttp.open("GET","getpairs.php",true);
 			        xhttp.send();
 			    }
 			    refreshpairs();
+				
 				var pairid;
+
 				function pairclicked(id){
-					$("#pairclicked").show("fast");
+					$("#pairclicked").fadeIn("fast");
 					pairid=id;
 				}
 
@@ -603,17 +681,18 @@
 						xhr.onload=function(){
 							if(xhr.status===200){
 							var response=xhr.responseText;
-							$('#process img').hide('slow');
-							$('#processheading').text("PAIR ADDED");
-							document.getElementById("processtext").innerHTML="";
-							document.getElementById("processtext").innerHTML+=response;
+							response=response.split("::;;");
+							$('#process img').fadeOut('slow');
+							$('#processheading').text(response[1]);
+							document.getElementById("processtext").innerHTML+=response[0];
 							}
 							else
 							alert('error');
 						}
 						xhr.open('POST',form.action,'true');
 						xhr.send(formdata);
-						$('#process').show();
+						$('#process').fadeIn('fast');
+						document.getElementById("processtext").innerHTML="";
 					
 				}
 
@@ -623,10 +702,11 @@
 						xhr.onload=function(){
 							if(xhr.status===200){
 								var response=xhr.responseText;
-								$('#process img').hide('slow');
-								$('#processheading').text("PAIR DELETED");
-								document.getElementById("processtext").innerHTML="";
-								document.getElementById("processtext").innerHTML+=response;
+								response=response.split("::;;");
+								$('#process img').fadeOut('slow');
+								$('#processheading').text(response[1]);
+								document.getElementById("processtext").innerHTML+=response[0];
+								refreshpairs();
 							}
 							else
 							alert('error');
@@ -635,12 +715,13 @@
 						xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 						xhr.send("submit=Delete&pairid="+pairid);
 						$("#pairclicked").hide();
-						$('#process').show();
+						$('#process').fadeIn("fast");
+						document.getElementById("processtext").innerHTML="";
 				}
 
 				function editpairclicked(){
-					$('#editpair').show('fast');
-					$("#pairclicked").hide();
+					$("#pairclicked").fadeOut('fast');
+					$('#editpair').fadeIn('fast');
 				}
 
 				document.getElementById("editpairform").onsubmit=function(e){
@@ -652,17 +733,18 @@
 						xhr.onload=function(){
 							if(xhr.status===200){
 							var response=xhr.responseText;
-							$('#process img').hide('slow');
-							$('#processheading').text("PAIR edited");
-							document.getElementById("processtext").innerHTML="";
-							document.getElementById("processtext").innerHTML+=response;
+							response=response.split("::;;");
+							$('#process img').fadeOut('slow');
+							$('#processheading').text(response[1]);
+							document.getElementById("processtext").innerHTML+=response[0];
 							}
 							else
 							alert('error');
 						}
 						xhr.open('POST',form.action,'true');
 						xhr.send(formdata);
-						$('#process').show();
+						$('#process').fadeIn("fast");
+						document.getElementById("processtext").innerHTML="";
 					
 				}
 
@@ -687,6 +769,8 @@
 				});$('input[name=c2file]').hide();
 
 				function refreshsettings(){
+					$("#loading").fadeIn("fast");
+					$("#loadingtext").text("refreshing settings");
 					var xhr=new XMLHttpRequest();
 					xhr.onload=function(){
 						if(xhr.status===200){
@@ -701,6 +785,7 @@
 							$("#sqlp").val(response[2]);
 							$("#sqld").val(response[3]);
 							$("#pno").val(response[4]);
+							$("#loading").fadeOut("fast");
 						}
 						else
 						alert('error');
@@ -713,6 +798,9 @@
 		</div>
 
 		<div id="settings" class="maincontent">
+			<div class="settingselement">
+				to save settings , click save at the bottom of the list
+			</div>
 			<div class="settingselement">
 				<div>
 					<font class="settingsheading">ACTIVE/INACTIVE</font>
@@ -759,6 +847,7 @@
 				</div>
 			</div>
 			<div class="settingselement" style="box-shadow:none;text-align:right;display:block;">
+				click on the button to save settings -->
 				<input type="button" value="Save" class="transparentbutton" onclick="savesettings()"/>
 				<script>
 					function savesettings(){
@@ -791,11 +880,14 @@
 		
 		<div id="fabs">
 			<!--<div style="display:inline-block;border-radius:3px;background-color:#555;font-size:80%;padding:4px;box-shadow:0px 2px 2px rgba(0,0,0,0.3);">Add Pair</div>-->
-			<img id="addpairbtn" src="/Matching-Game/assets/add.png" class="fab" onclick="$('#addpair').show('fast')"/>
+			<img id="addpairbtn" src="/Matching-Game/assets/add.png" class="fab" onclick="$('#addpair').fadeIn('fast')"/>
 		</div>
+
 		<script>
 			$("#actionbar").css("width",$(window).width()+"px");
 			$("#actionbar").css("height","64px");
+
+			$("#userinfo").css("height","64px");
 
 			$(".maincontent").css('padding-top',$(window).height()*0.05+"px")
 			$(".maincontent").css('padding-left',$(window).width()*0.05+"px")
@@ -809,8 +901,6 @@
 			$(".dialog").css("height",$(window).height()+"px");
 			$(".overlay").css("height",$(window).height()+"px");
 
-			$(".pairelement").css("width",$(window).width()*0.8+"px");
-
 			$(".fab").css('margin',$(window).height()*0.05);
 
 			$("#pairclicked").hide("fast");
@@ -820,20 +910,21 @@
 			$("#menu").hide('fast');
 			$("#process").hide('fast');
 
-			$("#processchild").css('height',$(window).height()*0.5);
-			$("#processchild").css('width',$(window).width()*0.5);
-
-			$("#processtext").css('height',$(window).height()*0.3);
-
 			$("#settings").hide();
 
 			$(".settingselement").css("width",$(window).width()*0.78+"px");
 			$(".settingselement").css("padding",$(window).width()*0.01+"px");
+
+			$(".pairelement").css('min-width',($(".mediaelement").width()*2+$(".cmpimgdiv").width())+"px");
+			$(".pairelement").css("width",$(window).width()*0.9+"px");
+
 		</script>
 		<script>
 			$(window).resize(function(){
 				$("#actionbar").css("width",$(window).width()+"px");
 				$("#actionbar").css("height","64px");
+
+				$("#userinfo").css("height","64px");
 
 				$(".maincontent").css('padding-top',$(window).height()*0.05+"px")
 				$(".maincontent").css('padding-left',$(window).width()*0.05+"px")
@@ -844,19 +935,19 @@
 				$(".dialog").css("height",$(window).height()+"px");
 				$(".overlay").css("height",$(window).height()+"px");
 
-				$(".pairelement").css("width",$(window).width()*0.8+"px");
+				$(".pairelement").css("width",$(window).width()*0.9+"px");
 
 				$(".fab").css('margin',$(window).height()*0.05);
-
-				$("#processchild").css('height',$(window).height()*0.5);
-				$("#processchild").css('width',$(window).width()*0.5);
-
-				$("#processtext").css('height',$(window).height()*0.3);
-
-				
-
+	
 				$(".settingselement").css("width",$(window).width()*0.78+"px");
 				$(".settingselement").css("padding",$(window).width()*0.01+"px");
+
+				$(".pairelement").css('min-width',($(".mediaelement").width()*2+$(".cmpimgdiv").width())+"px");
+
+			});
+			
+			$(window).load(function(){
+				$("#loading").fadeOut('slow');
 			});
 		</script>
 	</body>

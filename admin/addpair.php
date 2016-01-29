@@ -1,4 +1,3 @@
-
 <?php
 	session_start();
 	include "getpath.php";
@@ -31,7 +30,12 @@
 			if($exts=="jpg"||$exts=="jpeg"||$exts=="png"||$exts=="gif")
 				return 1;
 		if($type=="text")
-			return 1;
+			if($_POST['c1name']==""||$_POST['c2name']==""){
+				echo "<br>[process]:text boxes are empty<br>";
+				return 0;
+			}
+			else
+				return 1;
 
 		echo "<br>[process]:file is not of $type type<br>";
 		return 00;	
@@ -40,7 +44,7 @@
 	function getfilename($type){
 		include "getpath.php";		
 		include $localhost.'Matching-Game/assets/getconfig.php';
-		$conn = new mysqli("localhost",$sqlun,$sqlp,"matchinggame");
+		$conn = new mysqli("localhost",$sqlun,$sqlp,$sqld);
 		if($conn->connect_error){
 			die ("Connection Failed:".$conn->connect_error);
 		}
@@ -76,7 +80,7 @@
 	$chkf2=checkfile("c2file",$c2filetype);
 
 	if(!($chkf1!=0&&$chkf2!=0))
-		die("<br>aborting process<br>");
+		die("<br>aborting process<br>::;;error!");
 
 	echo "<br>[process]:processing first element of pair<br>";
 	echo "<br>[process]:its type is $c1filetype<br>";
@@ -101,7 +105,7 @@
 		if (move_uploaded_file($_FILES["c1file"]["tmp_name"],$targetfilec1)){
 			echo "<br>[process]:the file has been uploaded<br>";
 	    }else{
-			die("<br>[process]:ERROR! error uploading the file<br>");
+			die("<br>[process]:ERROR! error uploading the file<br>::;;error!");
 	    }
 	}
 
@@ -131,15 +135,15 @@
 		if (move_uploaded_file($_FILES["c2file"]["tmp_name"],$targetfilec2)){
 			echo "<br>[process]:the file has been uploaded<br>";
 	    }else{
-			die("<br>[process]:ERROR! error uploading the file<br>");
+			die("<br>[process]:ERROR! error uploading the file<br>::;;error!");
 	    }
 	}
 
 	//including this file will create two variable $sqlun,$sqlp which contain sql username and password respectively , which are stored in sqlunp.txt
 	include $localhost.'Matching-Game/assets/getconfig.php';
-	$conn = new mysqli("localhost",$sqlun,$sqlp,"matchinggame");
+	$conn = new mysqli("localhost",$sqlun,$sqlp,$sqld);
 	if($conn->connect_error){
-		die ("<br>[process]:Connection Failed:".$conn->connect_error."<br>");
+		die ("<br>[process]:Connection Failed:".$conn->connect_error."<br>::;;error!");
 	}
 
 	$id=1;
@@ -150,8 +154,8 @@
 	$query = "insert into pairs values('$c1name','$c1filetype','$c2name','$c2filetype','".$_SESSION['username']."',$id)";
 	$result = $conn->query($query);//running sql query
 	if($result){
-		echo "<br>[process]:pair added to database<br>";
+		echo "<br>[process]:pair added to database<br>::;;pair added";
 	}else{
-		echo "<br>[process]:cannot update database<br>";
+		echo "<br>[process]:cannot update database::;;error!<br>";
 	}
 ?>
