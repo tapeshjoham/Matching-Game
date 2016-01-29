@@ -12,7 +12,7 @@
 		return (int)substr($name[0],5);
 	}
 
-	function checkfile($name,$type){
+	function checkfile($name,$type,$no){
 		if($_FILES[$name]["size"]/(1024*1024)>10){
 			echo "<br>[process]:file size is greater that allowed 10mB<br>";
 			return 00;
@@ -30,7 +30,7 @@
 			if($exts=="jpg"||$exts=="jpeg"||$exts=="png"||$exts=="gif")
 				return 1;
 		if($type=="text")
-			if($_POST['c1name']==""||$_POST['c2name']==""){
+			if($_POST['c'.$no.'name']==""){
 				echo "<br>[process]:text boxes are empty<br>";
 				return 0;
 			}
@@ -141,9 +141,9 @@
 	$targetdir = $localhost."Matching-Game/assets/";
 	
 	echo "<br>[process]:checking first file<br>";
-	$chkf1=checkfile("c1file",$c1filetype);
+	$chkf1=checkfile("c1file",$c1filetype,1);
 	echo "<br>[process]:checking second file<br>";
-	$chkf2=checkfile("c2file",$c2filetype);
+	$chkf2=checkfile("c2file",$c2filetype,2);
 
 	if(!($chkf1!=0&&$chkf2!=0))
 		die("<br>aborting process<br>::;;error!");

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -116,6 +117,7 @@
 				background-color: #fff;
 				box-shadow:0px 0px 16px rgba(0,0,0,0.3);
 				z-index:10;
+				min-width:400px;
 			}
 			.loginheading{
 				font-family: roboto-medium;
@@ -143,7 +145,7 @@
 		<div class="underlay">
 			<div class="center-horizontal login">
 				<div class="text-center loginheading paddingtb">
-					<img src="assets/logo.png" height="26px;" style="background-color:#2196f3;padding:4px;border-radius:50%;"/>
+					<img id="imgut" src="assets/logo.png" height="26px;" style="background-color:#2196f3;padding:4px;border-radius:50%;"/>
 					<br>
 					login
 				</div>
@@ -156,12 +158,12 @@
 						<label for="adminradiobtn">ADMIN</label>
 					</div>
 					<div class="text-center paddingtb">
-						<div style="text-align:left;">
+						<div style="">
 						<input type="text" name="username" id="username" maxlength="20" placeholder="username"/>
 						<br>
 						<span id="usernameerror" class="inputerror"></span>
 						</div>
-						<div style="text-align:left;">
+						<div style="">
 						<input type="password" name="password" id="password" maxlength="20" placeholder="password"/>
 						<br>
 						<span id="passworderror" class="inputerror"></span>
@@ -181,9 +183,11 @@
 			$("input[type=radio]+label").css('width',$("input[type=button]").width()+"px");
 
 			$("#playerradiobtn").click(function(){
+				$("#imgut").attr("src","/Matching-Game/assets/logo.png");
 				$("#signupbtn").prop("disabled",false);
 			});
 			$("#adminradiobtn").click(function(){
+				$("#imgut").attr("src","/Matching-Game/assets/admin.png");
 				$("#signupbtn").prop("disabled",true);
 			});
 		</script>
