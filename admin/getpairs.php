@@ -1,4 +1,6 @@
 <?php
+	//file for getting pairs
+	
 	session_start();
 	include "getpath.php";
 

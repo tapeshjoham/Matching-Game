@@ -1,0 +1,232 @@
+@font-face {
+    font-family: roboto-thin;
+    src: url('/Matching-Game/assets/Roboto/Roboto-Thin.ttf');
+}
+@font-face {
+    font-family: roboto-light;
+    src: url('/Matching-Game/assets/Roboto/Roboto-Light.ttf');
+}
+@font-face {
+    font-family: roboto-medium;
+    src: url('/Matching-Game/assets/Roboto/Roboto-Medium.ttf');
+}
+@font-face {
+    font-family: roboto-regular;
+    src: url('/Matching-Game/assets/Roboto/Roboto-Regular.ttf');
+}
+body{
+	font-family:roboto-medium;
+	color:#555;
+	text-align:center;
+	padding-top:64px;
+	background-color:#f0f0f0;
+}
+	.overlay{
+		width:100%;
+		position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	background-color:#2196F3;box-shadow:0px 2px 4px rgba(0,0,0,1);padding:16px;
+	}
+	.transparentfab{
+	padding:8px;
+	margin:4px;
+	border-radius:50%;
+	-webkit-transition:background-color 0.3s,color 0.2s;
+	-moz-transition:background-color 0.3s,color 0.2s;
+	-o-transition:background-color 0.3s,color 0.2s;
+	transition:background-color 0.3s,color 0.2s;
+	cursor:pointer;
+}
+.transparentfab:hover{
+	background-color: rgba(0,0,0,0.3);
+}
+.transparentfab:active{
+	background-color: rgba(0,0,0,0.6);
+}
+#loading{
+	z-index:200;
+	display:flex;
+	align-items:center;
+	background-color:#ededed;
+}
+ul { 
+	list-style-type:none;margin:0;padding: 0;
+}
+li { 
+	margin:0px;padding:0;height:200px;background-color:#f0f0f0;box-shadow: 0px 2px 20px rgba(0,0,0,0.3);
+}
+#c2list li { 
+	margin:0px;
+	padding:0;
+	height:200px;
+	background-color:#fff;
+	cursor:pointer;
+	-webkit-transition:background-color 0.3s,color 0.3s,box-shadow 0.3s;
+-moz-transition:background-color 0.3s,color 0.3s,box-shadow 0.3s;
+-o-transition:background-color 0.3s,color 0.3s,box-shadow 0.3s;
+transition:background-color 0.3s,color 0.3s,box-shadow 0.3s;
+	box-shadow: 0px 2px 20px rgba(0,0,0,0.3);
+}
+#c2list li:hover { 
+	background-color:#fafafa;
+}
+#c2list li:active { 
+	background-color:#f0f0f0;
+	box-shadow: 0px 2px 40px rgba(0,0,0,0.3); 
+}
+.vr{
+	display:inline-block;
+	width:2px;
+	background-color:rgba(255,255,255,0.2);
+}
+.dialog{
+	width:100%;
+	position:fixed;
+top:0;
+left:0;
+background-color:rgba(0,0,0,0.9);
+font-family:roboto-medium;
+color:#fff;
+z-index:300;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+.actionbtn{
+-webkit-transition:background-color 0.3s,color 0.3s;
+-moz-transition:background-color 0.3s,color 0.3s;
+-o-transition:background-color 0.3s,color 0.3s;
+transition:background-color 0.3s,color 0.3s;
+cursor:pointer;
+}
+.actionbtn:hover{
+	background-color: rgba(0,0,0,0.3);
+}
+.actionbtn:active{
+	background-color: rgba(0,0,0,0.6);
+}
+.pairelement{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	height:200px;
+}
+.pairelement img{
+	width:200px;
+	height:200px;
+}
+.pairelement video{
+	width:200px;
+	height:200px;
+}
+.pairelement audio{
+	width:200px;
+}
+#actionbar{
+	margin:0;
+	padding:0;
+	position: fixed;
+	top:0px;
+	left:0px;
+	background:#2196F3;
+	display: flex;
+	align-items:center;
+	justify-content:end;
+	height:64px;
+	z-index:10;
+	color:#fff;
+}
+#userinfo{
+	margin:0;
+	padding:0;
+	position:fixed;
+	top:0px;
+	right:0px;
+	background:none;
+	display: flex;
+	align-items:center;
+	z-index:20;
+	height:64px;
+	color:#fff;
+}
+.settingselement{
+	display:flex;
+	align-items:center;
+	padding:8px;
+	-webkit-transition:background-color 0.3s,color 0.3s;
+	-moz-transition:background-color 0.3s,color 0.3s;
+	-o-transition:background-color 0.3s,color 0.3s;
+	transition:background-color 0.3s,color 0.3s;
+	
+	border-radius: 0px;
+	 	
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 16px;
+	background-color: #fff;
+	font-family:roboto-medium;
+}
+#submitbtn{
+	padding-right:8px;
+	padding-left:8px;
+	height:64px;
+	display:flex;
+	align-items:center;
+}
+.actionbarbtn{
+	height:64px;
+	display:flex;
+	align-items:center;
+}
+.actionbarbtn img{
+	padding:4px;
+	margin-right:8px;
+	margin-left:8px;
+}
+#scoreoverlay{
+	font-family:roboto-medium;
+	color:#fff;
+	z-index:100;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+#loadingchild{
+	margin-right:auto;
+	margin-left:auto;
+	text-align:center;
+	color:#555;
+}
+#menu{
+	color:#fff;
+	z-index:50;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+#play{
+	margin-bottom:16px;
+	margin-top:16px;
+	border:1px solid rgba(255,255,255,0.2);
+	padding:26px;
+}
+#fabs{
+	display:flex;
+	align-items:center;
+	margin:0;
+}
+#fabs div img{
+	padding:8px;
+	margin:4px;
+}
+#actiontext{
+	height:54px;
+	padding:8px;
+	display:block;
+	-webkit-transition:background-color 0.3s,color 0.3s;
+	-moz-transition:background-color 0.3s,color 0.3s;
+	-o-transition:background-color 0.3s,color 0.3s;
+	transition:background-color 0.3s,color 0.3s;
+}

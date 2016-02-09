@@ -1,4 +1,5 @@
 <?php
+	//file for updating config file
 	session_start();
 
 	$active=$_POST['active'];

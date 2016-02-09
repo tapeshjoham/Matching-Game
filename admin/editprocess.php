@@ -1,5 +1,6 @@
 <?php
-	
+	//file for editing pairs in database and renaming/deleting/uploading respective files
+
 	function getextension($name){
 		echo "<br>$name<br>";
 		$name=explode(".",$name);
@@ -43,6 +44,7 @@
 		return 00;	
 	}
 
+	/*function for updating database and maintaining continuous file names*/
 	function udpate_database($value='',$type='',$id) {
 		echo "<br>[process]:update database process started<br>";
 
@@ -106,6 +108,7 @@
 		}
 	}
 
+	/*function for maintaining continuous id*/
 	function update_id($id){
 		echo "<br>[process]:update id in database process started<br>";
 
@@ -140,6 +143,7 @@
 
 	$targetdir = $localhost."Matching-Game/assets/";
 	
+	//checking validity of files
 	echo "<br>[process]:checking first file<br>";
 	$chkf1=checkfile("c1file",$c1filetype,1);
 	echo "<br>[process]:checking second file<br>";
@@ -162,16 +166,20 @@
 
 	echo "<br>[process]:process started for first element<br>";
 	echo "<br>[process]:first element file type is $c1filetype<br>";
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-	if($c1filetype!="same")  // Executes when user changes in column I
+
+	if($c1filetype!="same")
 	{
+		//making changes in column 1
+
 		$first = $row[0];
 		$firsttype = $row[1];
 		$second = $row[2];
 		$secondtype = $row[3];
 
+		//old element process
 		echo "<br>[process]:first element previous file type is $row[1]<br>";
 
+		//deleting old first element file of pair
 		if($firsttype!="text")
 		{
 			$path = $targetdir.$row[1]."/".$row[0];
@@ -179,15 +187,18 @@
 				echo "<br>[process]:file deleted $path<br>";	
 		}
 
+		//renaming old second element file to temp for future reference
 		if($secondtype!="text"){
 			rename($targetdir.$secondtype."/".$second,$targetdir.$secondtype."/"."temp.".getextension($second));
 			echo "<br>[process]:file renamed from $second to temp<br>";
 		}
 
+		//deleting pair from database
 		$query="DELETE from pairs WHERE id=$pairid";
 		$result=$conn->query($query);
 		echo "<br>[process]:pair deleted from database<br>";
 
+		//updating database
 		if($firsttype!="text")
 			udpate_database($first,$firsttype,$pairid);
 		if(($firsttype!=$secondtype) && $secondtype!="text")
@@ -195,9 +206,12 @@
 
 		update_id($pairid);
 
+		//new element process
+
 		echo "<br>[process]:process of uploading new file started<br>";
 		echo "<br>[process]:first element file type is $c1filetype<br>";
 
+		//uploading new first element file of pair
 		if($c1filetype!="text")
 		{
 			$c1name=getfilename($c1filetype);
@@ -214,6 +228,7 @@
 		
 		echo "<br>[process]:second element file type is $secondtype<br>";
 
+		//for new second element of pair
 		if($secondtype!="text")
 		{
 	    	$c2name=getfilename($secondtype);
@@ -229,16 +244,19 @@
 
 	    	$c2name=$c2name.".".getextension($second);
 
+	    	//renaming the earlier temp file to appropriate name
 	    	rename($targetdir.$secondtype."/"."temp.".getextension($second),$targetdir.$secondtype."/".$c2name);
 	    	echo "<br>[process]:file renamed from temp to $c2name<br>";
 	    	$second = $c2name;
 		}
 
+		//getting id
 		$id=1;
 		$result=$conn->query("select max(id) from pairs");
 		if($row=mysqli_fetch_row($result))
 			$id=$row[0]+1;
 
+		//adding pair to database
 	    $query = "insert into pairs values('$c1name','$c1filetype','$second','$secondtype','".$_SESSION['username']."',$id)";
 		$result = $conn->query($query);   
 		
@@ -251,18 +269,21 @@
 	echo "<br>[process]:process started for second element<br>";
 	echo "<br>[process]:second element file type is $c2filetype<br>";
 
-	if($c2filetype!="same")   // Executes when user changes in column II
+	if($c2filetype!="same")
 	{
-		
-		$query="SELECT * FROM pairs WHERE id='$cmp'";  // Querying  from database
+		//making changes to column 2
+
+		$query="SELECT * FROM pairs WHERE id='$cmp'";
 		$result=$conn->query($query);
 		$row=mysqli_fetch_row($result);
 
-		if($check==1) {  // If Upper code Executes
+		if($check==1) {
+			//executes if there were changes in column 1
 			echo "<br>[process]:previous element also changed<br>";
 
 			echo "<br>[process]:old second element file type is $row[3]<br>";
 
+			//deleting old second element file of pair
 			if($row[3]!="text")
 			{
 				$path = $targetdir.$row[3]."/".$row[2];
@@ -270,6 +291,7 @@
 					echo "<br>[process]:file deleted $path<br>";
 			}
 
+			//uploading new second element file of pair
 			echo "<br>[process]:second element file type is $c2filetype<br>";
 
 			if($c2filetype!="text")
@@ -294,14 +316,16 @@
 			else 
 				$c2name=$_POST['c2name'];
 
+			//updating database
 			$query = "UPDATE pairs SET c2name='$c2name',c2type='$c2filetype' WHERE id='$cmp'";
 			$result = $conn->query($query);
 
 			echo "<br>[process]:database updated<br>";
 		}
-		/////////////////////////////////////////////////////////////////////////////////////
-		else{                         // Else this one executes
-
+		
+		else{                         
+			//executes if there were no changes in column 1
+			//code is same as column 1 replacing everything of column 2 to column 1 by symmetry
 			echo "<br>[process]:previous element did not change<br>";
 			
 			$first = $row[0];

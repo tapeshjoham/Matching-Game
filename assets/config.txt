@@ -1,4 +1,4 @@
-sql_username:root:
-sql_password:7196:
-sql_database:matchinggame:
-pairs_no:10:
+sql_username:abcd:
+sql_password:abcd:
+sql_database:abcd:
+pairs_no:abcd:

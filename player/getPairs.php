@@ -1,4 +1,5 @@
 <?php
+	//file for getting random pairs
 	include "getpath.php";
 
 	include $localhost."Matching-Game/assets/getconfig.php";

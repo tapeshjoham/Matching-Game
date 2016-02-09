@@ -1,4 +1,6 @@
 <?php
+	//file for deleting pair from database and deleting corresponding files
+
 	function getextension($name){
 		$name=explode(".",$name);
 		return $name[1];
@@ -9,6 +11,7 @@
 		return (int)substr($name[0],5);
 	}
 
+	/*function for updating database and maintaining continuous file names*/
 	function udpate_database($value='',$type='',$id) {
 		echo "<br>[process]:update database process started<br>";
 
@@ -46,6 +49,7 @@
 		}
 	}
 
+	/*function for maintaining continuous id*/
 	function update_id($id){
 		echo "<br>[process]:update id in database process started<br>";
 
@@ -84,6 +88,7 @@
 	$result=$conn->query($query);
 	$row=mysqli_fetch_row($result);
 	
+	//deleting first file
 	echo "<br>[process]:first file type is $row[1]<br>";
 
 	if($row[1]!="text"){
@@ -96,6 +101,7 @@
 	
 	echo "<br>[process]:second file type is $row[3]<br>";
 
+	//deleting second file
 	if($row[3]!="text"){
 		$path = $localhost."Matching-Game/assets/".$row[3]."/".$row[2];
 		if(unlink($path)) 
@@ -104,6 +110,7 @@
 		$col2 = $row[2];
 	}
 
+	//updating database
 	echo "<br>[process]:updating database<br>";
 
 	$query="DELETE from pairs WHERE id='$pairid'";	

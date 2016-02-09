@@ -1,4 +1,5 @@
 <?php
+    //file for updating player profile and telling if he made a highscore or not
     include "getpath.php";
 
     session_start();

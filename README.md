@@ -1,37 +1,22 @@
-# Matching Game
+#Matching Game
 Its a Matching based Game written in various languages like PHP, HTML/CSS with front-end checking using Javascript. In the Back-end ,Database is maintained by MySQL.
 
-changed by amanshu
-
-Project Member -
+Project Members -
 
 1) Amanshu Raikwar
 
 2) Tapesh Joham
 
-3) Ashish Arya
-
-NOTE :
-[1] go to assets/config.txt
-[2] write your sqlun,sqlp, in the file instead of mine as i have written there
-[3] check if mysqli commands run in your system, if not please run them, as they are new and old ones will soon be depricated
-[4] dont change mysql commands to old one, its takes much work to change them back
-
 player side :-
-(being done by amanshu)
+[1] player can play game by arranging tiles containing image,vieo,audio or text
 
 admin side :-
 [1] basic function of admin ui is to add,delete,edit pairs(being done by tapesh) 
 [2] there can be more than one admins
 [3] admins can add pairs and they will be added in the pairs table with their corresponding username
-[4] --
-[5] admins can be active or inactive , if an admin is active then his pairs will be included in the player's game and if inactive it will not be included
-[6] the superadmin will decide whether an admin is active or not
-[7] the superadmin will also be responsible for making admin accounts
-[8] there can be more than one active admins
-[9] an admin can access only his/her pairs for editing , adding , deleting pairs
-
-[10] (just a thought , not neccessary) as soon as an error occurs a messsage is sent to superadmin notifying of it 
+[4] admins can be active or inactive , if an admin is active then his pairs will be included in the player's game and if inactive it will not be included
+[5] there can be more than one active admins
+[6] an admin can access only his/her pairs for editing , adding , deleting pairs
 
 DATABASE SCHEMA :-(case sensitive)
 
@@ -76,18 +61,18 @@ image - jpg , jpeg , png , gif
 video - mp4
 audio - mp3 , wav , ogg
 
-CONFIG FILE :- (config.txt)
+CONFIG FILE :- (assets/config.txt)
 [1] sql_username
 [2] sql_password
-[3] sql_database 
+[3] sql_database
+[4] pairs_no
 
-LOCALHOST-PATH FILE :- (path.txt) (present in every directory and sub-directory)
+LOCALHOST-PATH FILE :- (<everty directory>/path.txt) (present in every directory and sub-directory)
 [1] localhost_path
 
 SETTINGS :-
 [1] sql username
 [2] sql password
 [3] sql database
-[4] localhost path
-[5] no of pairs shown to player
-[6] active or not
+[4] no of pairs shown to player
+[5] active or not

@@ -1,4 +1,6 @@
 <?php
+    //file for creating player account
+     
     include "getpath.php";
 
 	$username = htmlspecialchars($_POST['username']);
@@ -7,7 +9,7 @@
 	//creating sql un and pass
 	include $localhost."Matching-Game/assets/getconfig.php";
 
-	$conn=mysqli_connect("localhost",$sqlun,$sqlp,"matchinggame");
+	$conn=mysqli_connect("localhost",$sqlun,$sqlp,$sqld);
 	if($conn->connect_error){
     	//die("Connection to database failed: ".$conn->connect_error);
     	die("105");

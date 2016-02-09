@@ -1,4 +1,6 @@
+
 <?php
+//file for adding pairs to database and uploading respective files
 	session_start();
 	include "getpath.php";
 
@@ -70,10 +72,11 @@
 	echo "<br>[process]:add pair process started<br>";
 
 	$c1name;$c2name;
-	$c1filetype=$_POST['c1filetype'];//file types
+	$c1filetype=$_POST['c1filetype'];
 	$c2filetype=$_POST['c2filetype'];
 	$targetdir = $localhost."Matching-Game/assets/";
 	
+	//checking validity of files
 	echo "<br>[process]:checking first file<br>";
 	$chkf1=checkfile("c1file",$c1filetype,1);
 	echo "<br>[process]:checking second file<br>";
@@ -89,16 +92,16 @@
 		$c1name=$_POST['c1name'];
 		echo "<br>[process]:text is $c1name<br>";
 	}else{
-		//finding target/where-to-upload directory wrt file type and storing it in $targetfiledirc1
-		$targetdirc1=$targetdir.$c1filetype."/";
+		//uploading first file
 
-		//finding the extension of file and storing it in $exts
+		$targetdirc1=$targetdir.$c1filetype."/";
+		
 		$exts = pathinfo($_FILES['c1file']['name'],PATHINFO_EXTENSION);
 		
 		$c1name=getfilename($c1filetype);
 		$c1name=$c1name.".".$exts;
-		$targetfilec1=$targetdirc1.$c1name;//this is the whole path of the upload file , including the name
-		
+		$targetfilec1=$targetdirc1.$c1name;
+
 		echo "<br>[process]:uploading first file<br>";
 		echo "<br>[process]:its path is $targetfilec1<br>";
 		
@@ -112,19 +115,20 @@
 	echo "<br>[process]:processing second element of pair<br>";
 	echo "<br>[process]:its type is $c2filetype<br>";
 
-	//uploading second file
+	
 	if($c2filetype=="text"){
 		$c2name=$_POST['c2name'];
 		echo "<br>[process]:text is $c2name<br>";
 	}else{
-		
+		//uploading second file
+
 		$targetdirc2=$targetdir.$c2filetype."/";
 		
 		$exts=pathinfo($_FILES['c2file']['name'],PATHINFO_EXTENSION);
 		
 		$c2name=getfilename($c2filetype);
 		if($c1filetype==$c2filetype){
-			$c2name=$c2filetype."".(((int)$c2name[strlen($c2filetype)])+1);	
+			$c2name=$c2filetype."".(getsrno($c2name.".".$exts)+1);	
 		}
 		$c2name=$c2name.".".$exts;
 		$targetfilec2=$targetdirc2.$c2name;
@@ -139,18 +143,19 @@
 	    }
 	}
 
-	//including this file will create two variable $sqlun,$sqlp which contain sql username and password respectively , which are stored in sqlunp.txt
 	include $localhost.'Matching-Game/assets/getconfig.php';
 	$conn = new mysqli("localhost",$sqlun,$sqlp,$sqld);
 	if($conn->connect_error){
 		die ("<br>[process]:Connection Failed:".$conn->connect_error."<br>::;;error!");
 	}
 
+	//getting id
 	$id=1;
 	$result=$conn->query("select max(id) from pairs");
 	if($row=mysqli_fetch_row($result))
 		$id=$row[0]+1;
 
+	//updating database
 	$query = "insert into pairs values('$c1name','$c1filetype','$c2name','$c2filetype','".$_SESSION['username']."',$id)";
 	$result = $conn->query($query);//running sql query
 	if($result){

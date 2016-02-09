@@ -1,4 +1,5 @@
 <?php
+	//file for getting localhost path
 	$file=fopen("path.txt","r");
 	$localhost;
 	

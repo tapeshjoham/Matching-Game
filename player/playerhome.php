@@ -11,6 +11,7 @@
 	if($output==103)
 		die("permission denied");
     
+    //function for getting high score of player till now
 	function gethighscore(){
 		include "getpath.php";		
 		//creating sql un and pass
@@ -24,6 +25,8 @@
 				return 	$row['highscore'];
 		
 	}
+
+	//function for getting average score of the player till now
 	function getaverage(){
 		include "getpath.php";		
 		//creating sql un and pass
@@ -43,187 +46,30 @@
 		<title>
 			player | home
 		</title>
-		<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
+		<link type="text/css" rel="stylesheet" href="style.css"/>
  	 	<script src="/Matching-Game/assets/jquery.min.js"></script>
   		<script src="/Matching-Game/assets/jquery-ui.min.js"></script>
-  		<style>
-  			@font-face {
-			    font-family: roboto-thin;
-			    src: url('/Matching-Game/assets/Roboto/Roboto-Thin.ttf');
-			}
-			@font-face {
-			    font-family: roboto-light;
-			    src: url('/Matching-Game/assets/Roboto/Roboto-Light.ttf');
-			}
-			@font-face {
-			    font-family: roboto-medium;
-			    src: url('/Matching-Game/assets/Roboto/Roboto-Medium.ttf');
-			}
-			@font-face {
-			    font-family: roboto-regular;
-			    src: url('/Matching-Game/assets/Roboto/Roboto-Regular.ttf');
-			}
-			body{
-				font-family:roboto-medium;
-				color:#555;
-			}
-  			.overlay{
-  				width:100%;
-  				position:fixed;
-				top:0;
-				left:0;
-				width:100%;
-				background-color:#2196F3;box-shadow:0px 2px 4px rgba(0,0,0,1);padding:16px;
-  			}
-  			.transparentfab{
-				padding:8px;
-				margin:4px;
-				border-radius:50%;
-				transition:background-color 0.3s;
-				cursor:pointer;
-			}
-			.transparentfab:hover{
-				background-color: rgba(0,0,0,0.3);
-			}
-			.transparentfab:active{
-				background-color: rgba(0,0,0,0.6);
-			}
-  			#loading{
-  				z-index:200;
-  				display:flex;
-  				align-items:center;
-  				background-color:#ededed;
-  			}
-  			ul { 
-  				list-style-type:none;margin:0;padding: 0;
-  			}
-  			li { 
-  				margin:0px;padding:0;height:200px;background-color:#f0f0f0;box-shadow: 0px 2px 20px rgba(0,0,0,0.3);
-  			}
-  			#c2list li { 
-  				margin:0px;
-  				padding:0;
-  				height:200px;
-  				background-color:#fff;
-  				cursor:pointer;
-  				transition:background-color 0.3s,box-shadow 0.3s;
-  				box-shadow: 0px 2px 20px rgba(0,0,0,0.3);
-  			}
-  			#c2list li:hover { 
-  				background-color:#fafafa;
-  			}
-  			#c2list li:active { 
-  				background-color:#f0f0f0;
-  				box-shadow: 0px 2px 40px rgba(0,0,0,0.3); 
-  			}
-  			.vr{
-  				display:inline-block;
-  				width:2px;
-  				background-color:rgba(255,255,255,0.2);
-  			}
-  			.dialog{
-  				width:100%;
-  				position:fixed;
-				top:0;
-				left:0;
-				background-color:rgba(0,0,0,0.9);
-				font-family:roboto-medium;
-				color:#fff;
-				z-index:300;
-				display:flex;
-				align-items:center;
-				justify-content:center;
-  			}
-  			.actionbtn{
-				transition:background-color 0.3s;
-				cursor:pointer;
-			}
-			.actionbtn:hover{
-				background-color: rgba(0,0,0,0.3);
-			}
-			.actionbtn:active{
-				background-color: rgba(0,0,0,0.6);
-			}
-			.pairelement{
-				display:flex;
-				align-items:center;
-				justify-content:center;
-				height:200px;
-			}
-			.pairelement img{
-				width:200px;
-				height:200px;
-			}
-			.pairelement video{
-				width:200px;
-				height:200px;
-			}
-			.pairelement audio{
-				width:200px;
-			}
-			#actionbar{
-				margin:0;
-				padding:0;
-				position: fixed;
-				top:0px;
-				left:0px;
-				background:#2196F3;
-				display: flex;
-				align-items:center;
-				justify-content:end;
-				height:64px;
-				z-index:10;
-				color:#fff;
-			}
-			#userinfo{
-				margin:0;
-				padding:0;
-				position:fixed;
-				top:0px;
-				right:0px;
-				background:none;
-				display: flex;
-				align-items:center;
-				z-index:20;
-				height:64px;
-				color:#fff;
-			}
-			.settingselement{
-				display:flex;
-				align-items:center;
-				padding:8px;
-				transition:background-color 0.3s;
-				
-				border-radius: 0px;
-				 	
-				margin-right: auto;
-				margin-left: auto;
-				margin-bottom: 16px;
-				background-color: #fff;
-				font-family:roboto-medium;
-			}
-  		</style>
 	</head>
-	<body style="text-align:center;padding-top:64px;background-color:#f0f0f0;">
+	<body>
 		<div id="actionbar">
 			<img src="/Matching-Game/assets/admin.png" style="padding:4px;margin-right:8px;margin-left:8px;" height="26px"/>
 			<?php echo $_SESSION['username'];?>
 		</div>
 		<div id="userinfo">
-			<div class="actionbtn" style="padding-right:8px;padding-left:8px;height:64px;display:flex;align-items:center;" onclick="submitbtnclicked()">
+			<div class="actionbtn" id="submitbtn" style="" onclick="submitbtnclicked()">
 				submit
 			</div>
 			<div class="vr"></div>
-			<div class="actionbtn" style="height:64px;display:flex;align-items:center;" onclick="refreshpairs()">
-				<img src="/Matching-Game/assets/replay.png" style="padding:4px;margin-right:8px;margin-left:8px;" height="26px"/>
+			<div class="actionbtn actionbarbtn" onclick="refreshpairs()">
+				<img src="/Matching-Game/assets/replay.png" height="26px"/>
 			</div>
 			<div class="vr"></div>
-			<div class="actionbtn" style="height:64px;display:flex;align-items:center;" onclick="showmenu()">
-				<img src="/Matching-Game/assets/close.png" style="padding:4px;margin-right:8px;margin-left:8px;" height="26px"/>
+			<div class="actionbtn actionbarbtn"  onclick="showmenu()">
+				<img src="/Matching-Game/assets/close.png" height="26px"/>
 			</div>
 			<div class="vr"></div>
 		</div>
-		<div id="scoreoverlay" class="overlay" style="font-family:roboto-medium;color:#fff;z-index:100;display:flex;align-items:center;justify-content:center;">
+		<div id="scoreoverlay" class="overlay">
 			<div>
 				
 				<img class="transparentfab" src="/Matching-Game/assets/close.png" height="22px" onclick="$('#scoreoverlay').fadeOut('fast')"/>
@@ -236,41 +82,41 @@
 				</div>
 			</div>	 
 		</div>
-		<div id="loading" class="overlay" style="">
-			<div style="margin-right:auto;margin-left:auto;text-align:center;color:#555;">
+		<div id="loading" class="overlay">
+			<div id="loadingchild">
 				<img src="/Matching-Game/assets/loading.gif" height="100px" />
 				<br>
 				<font id="loadingtext">loading</font> . . .
 			</div>
 		</div>
-		<div id="menu" style="color:#fff;z-index:50;display:flex;align-items:center;justify-content:center;" class="overlay">
+		<div id="menu" class="overlay">
 			<div id="menuchild" style="text-align:center;">
 				
 				<img src="/Matching-Game/assets/admin.png" style="padding:4px;margin:0px;" height="26px"/>
 				<br>
 				<?php echo $_SESSION['username'];?>
 				<br>
-				<img class="transparentfab" id="play" src="/Matching-Game/assets/play.png" onclick="srbtnclick()" height="40px" style="margin-bottom:16px;margin-top:16px;border:1px solid rgba(255,255,255,0.2);padding:26px;"/>
+				<img class="transparentfab" id="play" src="/Matching-Game/assets/play.png" onclick="srbtnclick()" height="40px"/>
 
-				<div id="fabs" style="display:flex;align-items:center;margin:0;">
+				<div id="fabs" style="">
 					<img class="transparentfab" src="/Matching-Game/assets/back.png" onclick="history.back()" height="22px"/>
 					<div class="vr"></div>
 					<div id="highscorebtn" class="actionbtn" >
-						<img src="/Matching-Game/assets/highscore.png" style="padding:8px;margin:4px;" height="22px"/>
+						<img src="/Matching-Game/assets/highscore.png"  height="22px"/>
 					</div>
 					<div class="vr"></div>
 					<div id="rankingbtn" class="actionbtn" >
-						<img src="/Matching-Game/assets/ranking.png" style="padding:8px;margin:4px;" height="22px"/>
+						<img src="/Matching-Game/assets/ranking.png" height="22px"/>
 					</div>
 					<br>	
 				</div>
-				<div id="actiontext" style="height:54px;padding:8px;display:block;transition:background-color 0.3s;">
+				<div id="actiontext" style="">
 					
 				</div>
 			</div>
 		</div>
 		<script>
-			
+			//player stats button onhover listeners
 			$("#highscorebtn").hover(
 				function(){
 					$("#actiontext").html("Highscore<br><font style='font-size:140%'>"+<?php echo gethighscore();?>+"</font>");
@@ -318,8 +164,10 @@
 			function showmenu(){$("#menu").fadeIn('slow');}
 		</script>
 		<script>
+			//everything related to the game , preparation to submission goes here
 			var col2actual;
 			
+			//funciton that prepares the game or refreshes the pairs
 			function refreshpairs(){
 				var col1=[];
 				var col2=[];
@@ -348,6 +196,7 @@
 	        	$("#loadingtext").text("preparing game");	
 			}
 
+			//printing respective html5 media element
         	function printhtml(name,type,htmlelement,ID){
         		
         		if(type=="audio"){
@@ -364,6 +213,7 @@
         		}
         	}
 
+        	//funciton for parsing and printing the data recieved from php file
 			function parseAndPrint(response,col1,col2,c1,c2,printed){
 				var pieces1 = response.split(";;;");
 				var index=0;
@@ -410,6 +260,7 @@
 				return false;
 			}
 
+			//submit button onclick listeners
 			function submitbtnclicked(){
 				var score=0;
 				var index=0;
@@ -430,6 +281,7 @@
 				showmenu();
 			}
 
+			//function for updating playr profile
 			function updateplayerprofile(score){
 				var xhttp = new XMLHttpRequest();
 	            xhttp.onreadystatechange = function() {
@@ -454,6 +306,7 @@
 	        	$("#loadingtext").text("updating player profile");	
 			}
 
+			//function for adding game to database
 			function addgametodatabase(score){
 				var xhttp = new XMLHttpRequest();
 	            xhttp.onreadystatechange = function() {
@@ -473,6 +326,7 @@
 	        	$("#loadingtext").text("adding game to database");
 			}
 
+			//play button onclick listener
 			function srbtnclick(){
 				hidemenu();
 				refreshpairs();
@@ -480,6 +334,7 @@
 			}
 		</script>
 		<script>
+			//initialising attributes
 			$("document").ready(function(){
 				$("#scoreoverlay").hide();
 				$("#c2list").sortable({axis:"y"});
@@ -496,6 +351,7 @@
 			});
 			$(window).resize(function(){
 				$("#actionbar").css("width",$(window).width()+"px");
+				$(".overlay").css("height",$(window).height()+"px");
 			});
 		</script>
 	</body>

@@ -1,4 +1,5 @@
 <?php
+	//file for getting contents of config file
 	session_start();
 
 	include "getpath.php";

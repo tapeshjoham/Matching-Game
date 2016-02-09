@@ -1,5 +1,5 @@
-
 <?php
+    //file for adding game to database
     include "getpath.php";
 
     session_start();

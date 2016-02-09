@@ -31,6 +31,7 @@
 				color:#555;
 				background-color:#42a5f5;
 			}
+
 			input[type=radio]{
 				display:none;
 				margin:0;
@@ -42,11 +43,13 @@
 				background-color: #ccc;
 				color:#999;
 				margin: 0;
+				-webkit-transition:background-color 0.3s,color 0.3s;
+				-moz-transition:background-color 0.3s,color 0.3s;
+				-o-transition:background-color 0.3s,color 0.3s;
 				transition:background-color 0.3s,color 0.3s;
 				padding:6px;
 				display:inline-block;
-				}
-
+			}
 			input[type=radio]:checked + label{
 				background-color:#2196F3;
 				color:#fff;
@@ -60,13 +63,14 @@
 				color:#555;
 				padding:8px;
 				font-size:110%;
-				transition:background-color 0.3s;
+				-webkit-transition:background-color 0.3s,color 0.3s;
+				-moz-transition:background-color 0.3s,color 0.3s;
+				-o-transition:background-color 0.3s,color 0.3s;
+				transition:background-color 0.3s,color 0.3s;
 			}
-
 			input[type=text]:hover,input[type=password]:hover{
 				background-color:#fafafa;
 			}
-
 			input[type=text]:focus,input[type=password]:focus{
 				background-color:#fafafa;
 			}
@@ -75,8 +79,10 @@
 				 font-size:100%;
 				 background-color:#2196F3;
 				 color: #fff;
-				 -webkit-transition:background-color 0.3s;
-				 transition:background-color 0.3s;
+				 -webkit-transition:background-color 0.3s,color 0.3s;
+				-moz-transition:background-color 0.3s,color 0.3s;
+				-o-transition:background-color 0.3s,color 0.3s;
+				transition:background-color 0.3s,color 0.3s;
 				 border:none;
 				 outline:none;
 				 padding:6px;
@@ -85,16 +91,13 @@
 				 margin:0;
 				 font-family:roboto-regular;
 			}
-
 			input[type=button]:disabled{
 				background-color:#ccc;
 				color:#999;
 			}
-
 			input[type="submit"]:hover,input[type="button"]:hover:not([disabled]){
 				background-color:#1976D2;
 			}
-
 			input[type="button"]:active:not([disabled]),input[type="submit"]:active{
 			    background-color:#0d47a1;
 			}
@@ -130,9 +133,35 @@
 			}
 			.inputerror{
 				color:red;
-				font-size: 80%;
+				font-size:80%;
 				font-family:roboto-regular;
 			}
+			#imgut{
+				background-color:#2196f3;
+				padding:4px;
+				border-radius:50%;
+			}
+			.overlay{
+				width:100%;
+				position:fixed;
+				top:0;
+				left:0;
+				width:100%;
+				background-color:#2196F3;box-shadow:0px 2px 4px rgba(0,0,0,1);padding:16px;
+			}
+			#loading{
+				z-index:200;
+				display:flex;
+				align-items:center;
+				background-color:#ededed;
+			}
+			#loadingchild{
+				margin-right:auto;
+				margin-left:auto;
+				text-align:center;
+				color:#555;
+			}
+			
 		</style>
 
 		<script src="/Matching-Game/assets/jquery.min.js">
@@ -142,10 +171,18 @@
 	
 	</head>
 	<body>
+		<div id="loading" class="overlay">
+			<div id="loadingchild">
+				<img src="/Matching-Game/assets/loading.gif" height="100px" />
+				<br>
+				<font id="loadingtext">loading</font> . . .
+			</div>
+		</div>
+
 		<div class="underlay">
 			<div class="center-horizontal login">
 				<div class="text-center loginheading paddingtb">
-					<img id="imgut" src="assets/logo.png" height="26px;" style="background-color:#2196f3;padding:4px;border-radius:50%;"/>
+					<img id="imgut" src="assets/logo.png" height="26px;"/>
 					<br>
 					login
 				</div>
@@ -178,10 +215,18 @@
 		</div>
 		
 		<script>
-			$(".underlay").css("height",$(window).height());
+			//providing height for background while resizing also
+			$(".overlay").css("height",$(window).height()+"px");
+			$(".underlay").css("height",$(window).height()+"px");
+			$(window).resize(function(){	
+				$(".underlay").css("height",$(window).height()+"px");
+			});
+
+			//width of button and radio button
 			$("input[type=button]").css('width',$(".login").width()/2+"px");
 			$("input[type=radio]+label").css('width',$("input[type=button]").width()+"px");
 
+			//onclick listeners of radio buttons
 			$("#playerradiobtn").click(function(){
 				$("#imgut").attr("src","/Matching-Game/assets/logo.png");
 				$("#signupbtn").prop("disabled",false);
@@ -189,6 +234,10 @@
 			$("#adminradiobtn").click(function(){
 				$("#imgut").attr("src","/Matching-Game/assets/admin.png");
 				$("#signupbtn").prop("disabled",true);
+			});
+
+			$(window).load(function(){
+				$("#loading").fadeOut("fast");
 			});
 		</script>
 		<script>
@@ -205,6 +254,7 @@
 				onInputListener(20,password,passworderror);
 			});
 
+			//sign in button onclick listener
 			function signinclicked(){
 				var usertype=$("input:radio[name=usertype]:checked");
 				var unchk = checkInputOnSubmit(5,username,usernameerror);
@@ -215,6 +265,7 @@
 	                xhttp.onreadystatechange = function() {
 	                	if (xhttp.readyState == 4 && xhttp.status == 200) {
 	                        var response = xhttp.responseText;
+	                        $("#loading").fadeOut("fast");
 	                        if(response==104){
 	                        	makeChanges(1,"invalid credentials",username,usernameerror);
 	                        	makeChanges(1,"invalid credentials",password,passworderror);
@@ -233,9 +284,12 @@
 			        xhttp.open("POST","checkcredentials.php",true);
 			        xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");		        
 			        xhttp.send("username="+username.val()+"&password="+password.val()+"&usertype="+usertype.val());
+			        $("#loading").fadeIn("fast");
+			        $("#loadingtext").text("processing data...");
 				}
 			}
 
+			//sign up button onclick listener
 			function signupclicked(){
 				var usertype=$("input:radio[name=usertype]:checked");
 				var unchk = checkInputOnSubmit(5,username,usernameerror);
@@ -246,6 +300,7 @@
 	                xhttp.onreadystatechange = function() {
 	                	if (xhttp.readyState == 4 && xhttp.status == 200) {
 	                        var response = xhttp.responseText;
+	                        $("#loading").fadeOut("fast");
 	                        if(response==101)
 	                        	makeChanges(1,"username already taken , try another one",username,usernameerror);
 	                        if(response==103)
@@ -261,6 +316,8 @@
 			        xhttp.open("POST","createplayeraccount.php",true);
 			        xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");		        
 			        xhttp.send("username="+username.val()+"&password="+password.val());
+					$("#loading").fadeIn("fast");
+			        $("#loadingtext").text("processing data...");
 				}
 			}
 		</script>
