@@ -1,3 +1,4 @@
+
 <?php
 	include "getpath.php";
 
@@ -260,11 +261,12 @@
 				return false;
 			}
 
+			var pno=<?php echo $pno;?>;
 			//submit button onclick listeners
 			function submitbtnclicked(){
 				var score=0;
 				var index=0;
-				while(index<5){
+				while(index<pno){
 					var onpage = $("#c2list li:nth-child("+(index+1)+") div").data("src");
 					var actual=col2actual[index].split(";;");
 					var actual=actual[0];
@@ -332,6 +334,8 @@
 				refreshpairs();
 				$('#srbtn').attr('value','replay');
 			}
+
+			
 		</script>
 		<script>
 			//initialising attributes

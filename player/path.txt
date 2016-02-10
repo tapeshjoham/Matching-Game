@@ -1,1 +1,1 @@
-localhost_path:yoyo:
+localhost_path:/var/www/html/:
